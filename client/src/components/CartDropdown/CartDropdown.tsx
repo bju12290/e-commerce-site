@@ -36,12 +36,7 @@ export default function CartDropdown(props: any) {
     }
 
     return (
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <div className="m-2 nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Cart
-                </a>
-                    <div className="cart dropdown-menu dropdown-menu-end mt-3 p-3 text-center" aria-labelledby="navbarDropdown">
+       <>
                         {cartContents.map((item: any, index: number) => {
                             return (
                             <>
@@ -64,8 +59,6 @@ export default function CartDropdown(props: any) {
                         {/* Pass in price from stripe to cartContents, calculate total based off of quantity */}
                         <p>Total: $x.xx</p>
                         <button onClick={handleCheckout}>Checkout</button>
-                    </div>
-            </div>
-        </div>
+    </>
     )
 }

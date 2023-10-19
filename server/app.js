@@ -6,10 +6,18 @@ const axios = require('axios')
 const cors = require('cors')
 const stripe = require('stripe')(process.env.TEST_STRIPE_API_TOKEN);
 const bodyParser = require('body-parser');
+const cloudinary = require('cloudinary').v2;
 
 const app = express();
 
 const YOUR_DOMAIN = 'https://localhost:3000';
+
+cloudinary.config({
+  secure: true
+});
+
+// Log the configuration
+console.log(cloudinary.config());
 
 app.use(cors())
 app.use(bodyParser.json());
@@ -151,6 +159,71 @@ app.get('/getProductInformation', async (req, res) => {
     }
 })
 
+app.get('/popularity', (req, res) => {
+  // Read and send the JSON file with popularity data.
+  res.sendFile(__dirname + '/popularity.json');
+});
+
+app.get('/popularity/:productId', (req, res) => {
+  const productId = req.params.productId;
+
+  // Read the JSON file that contains popularity data.
+  fs.readFile('popularity.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      res.status(500).send('Internal Server Error');
+    } else {
+      try {
+        const popularityData = JSON.parse(data);
+
+        // Retrieve the popularity data for the specified product.
+        const popularity = popularityData[productId];
+
+        // Send the popularity data as a JSON response.
+        res.json(popularity);
+      } catch (parseError) {
+        console.error('Error parsing JSON:', parseError);
+        res.status(500).send('Internal Server Error');
+      }
+    }
+  });
+});
+
+app.put('/popularity/:productId', (req, res) => {
+  const productId = req.params.productId;
+  const { popularity } = req.body;
+
+  // Read the JSON file to get the current popularity data.
+  fs.readFile('popularity.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    try {
+      const popularityData = JSON.parse(data);
+
+      // Update the popularity value for the specified product.
+      popularityData[productId] = popularity;
+
+      // Write the updated data back to the JSON file.
+      fs.writeFile('popularity.json', JSON.stringify(popularityData, null, 2), 'utf8', (writeErr) => {
+        if (writeErr) {
+          console.error('Error writing to JSON file:', writeErr);
+          res.status(500).send('Internal Server Error');
+        } else {
+          // Respond with the updated popularity value.
+          res.json(popularity);
+        }
+      });
+    } catch (parseError) {
+      console.error('Error parsing JSON:', parseError);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+});
+
 app.get('/getProductInformation/:productId', async (req, res) => {
   const productId = req.params.productId;
 
@@ -269,6 +342,8 @@ const sslOptions = {
     key: fs.readFileSync('./key.pem'),
     cert: fs.readFileSync('./cert.pem')
 };
+
+console.log('SSL Options:', sslOptions);
 
 const port = 3000
 

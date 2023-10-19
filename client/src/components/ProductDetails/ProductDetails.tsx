@@ -1,10 +1,13 @@
 import React from 'react'
+import axios from 'axios'
 
 export default function ProductDetails(props: any) {
     const [productSize, setProductSize] = React.useState('S')
     const [productColor, setProductColor] = React.useState('Black')
+    const [popularity, setPopularity] = React.useState({})
 
     const setProductId = props.setProductId
+    const productId = props.productId
     setProductId(props.productId)
     const stripeProductData = props.productDetails.stripeData
     const printfulProductData = props.productDetails.printfulData
@@ -14,6 +17,55 @@ export default function ProductDetails(props: any) {
     const products = props.products
     const cartContents = props.cartContents
     const setCartContents = props.setCartContents
+
+        console.log(props.productId)
+
+        React.useEffect(() => {
+            // Fetch popularity data from your server endpoint.
+            axios.get('https://localhost:3000/popularity')
+              .then(response => {
+                setPopularity(response.data);
+              })
+              .catch(error => {
+                console.error('Error fetching popularity data:', error);
+              });
+          }, []);
+        
+          React.useEffect(() => {
+            incrementPopularity(productId);
+          }, [productId]);
+        
+          const incrementPopularity = (productID: any) => {
+            // Fetch the current popularity value from the server.
+            axios.get(`https://localhost:3000/popularity/${productID}`)
+              .then(response => {
+                const currentPopularity = response.data;
+        
+                // Increment the popularity value.
+                const updatedPopularity = currentPopularity + 1;
+        
+                // Update the popularity value on the client-side.
+                // You can display this updated popularity value in your component.
+                console.log('Updated Popularity:', updatedPopularity);
+        
+                // Send the updated popularity value to the server.
+                updatePopularityOnServer(productID, updatedPopularity);
+              })
+              .catch(error => {
+                console.error('Error fetching current popularity data:', error);
+              });
+          };
+        
+          const updatePopularityOnServer = (productID: any, updatedPopularity: any) => {
+            // Send a PUT request to update the popularity on the server.
+            axios.put(`https://localhost:3000/popularity/${productID}`, { popularity: updatedPopularity })
+              .then(response => {
+                console.log('Popularity data updated on the server:', response.data);
+              })
+              .catch(error => {
+                console.error('Error updating popularity on the server:', error);
+              });
+          };
 
     for (const variant of productVariants) {
         const size = variant.size;
@@ -101,11 +153,6 @@ export default function ProductDetails(props: any) {
         });
     }
 
-    console.log(cartContents)
-    console.log(productColor)
-    console.log(productSize)
-    
-
     return (
     <div>
         <h1>{printfulProductData ? printfulProductData.result.sync_product.name : "Loading..."}</h1>
@@ -123,11 +170,3 @@ export default function ProductDetails(props: any) {
     </div>
     )
 }
-
-
-// Pass size and color as metadata for each product to the serverside to use in the checkoutSessions metadata. This data would be used to tell what color/size to create of which product. We can either store the color/size inside an array, and the products size and color would all line up 1 to 1, or we could have a new key value pair added for each new product added to cart. Probably the better option, it's more clear. Ie
-
-// productOneSize: L
-// productOneColor: Navy
-// productTwoSize: L
-// productTwoColor: Black

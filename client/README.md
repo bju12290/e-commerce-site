@@ -1,12 +1,7 @@
 # To Do
 
-- Create Login/Sign Up Component. Will be a dropdown inside Navbar.:white_check_mark:
-   - Conditionally Render Sign Up or Register Based on State, Allow User to Switch Between Sign Up and Register Window:white_check_mark:
+## Order History Page Changes
 
-- Create Navbar, Place Login/Sign Up Component in Navbar. If user is logged in, change Navbar login section to account management dropdown.
+- If multiple products are ordered, consider a better way to display that on the order history list. As is, only the first product in the cart's photo and title is displayed. Maybe don't display an image or a product title at all, just an order number and total? 
 
-- Create Product Database, Get a Product Added
-
-- Get a Product(s) displayed on the home page
-
-- Get a Product Page working
+- Maybe take inspiration from amazon here. Each order gets a box, each item gets a small section of the order box. This is the one.

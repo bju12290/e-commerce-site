@@ -1,0 +1,30 @@
+.hero {
+    margin-top: 5rem;
+}
+
+.hero-image {
+    width: 85vw;
+}
+
+.shop-btn {
+    margin-top: -7rem;
+}
+
+.mySwiper a:hover {
+    cursor: grab;
+}
+
+.custom--container {
+ width: 90vw;
+}
+
+/* Define the initial size and transition properties */
+.hoverzoom {
+    transition: transform 0.3s ease;
+    padding: 2rem;
+  }
+  
+  /* Apply the zoom effect on hover */
+  .hoverzoom:hover {
+    transform: scale(1.2);
+  }
