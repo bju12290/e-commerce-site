@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+
 html, body, #root {
     background-color: idk;
+    font-family: "Tilt Neon", sans-serif;
+}
+
+.header-color {
+    color: #212D40 !important;
+    text-shadow: 2px 2px 0px #5f7396;
+}
+
+.paragraph-color {
+    color: #5f7396 !important;
+}
+
+.button-color {
+    background-color: #212D40 !important;
+    color: #5f7396 !important;
+    border: none !important;
+}
+
+.button-color:hover {
+    background-color:#5f7396 !important;
+    color:#212D40 !important;
 }

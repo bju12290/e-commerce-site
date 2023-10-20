@@ -1,3 +1,11 @@
+
+.hero-heading-container {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
 .hero {
     margin-top: 5rem;
 }
@@ -7,7 +15,7 @@
 }
 
 .shop-btn {
-    margin-top: -7rem;
+    min-width: 95px;
 }
 
 .mySwiper a:hover {
@@ -16,15 +24,38 @@
 
 .custom--container {
  width: 90vw;
+ margin-top: 15vh;
+ margin-bottom: 10vh;
 }
 
-/* Define the initial size and transition properties */
+.carousel--container {
+    margin-top: 10vh;
+}
+
 .hoverzoom {
     transition: transform 0.3s ease;
     padding: 2rem;
-  }
+    min-width: 200px;
+}
   
-  /* Apply the zoom effect on hover */
-  .hoverzoom:hover {
+.hoverzoom:hover {
     transform: scale(1.2);
+}
+
+  .banner {
+    width: 101vw;
+    margin-top: 33vh;
+    margin-bottom: 8vh;
   }
+
+
+  @media (max-width: 768px) {
+    .hero-heading-container {
+        top: 25%;
+    }
+
+    .hero-image {
+        width: 100vw;
+    }
+}
+

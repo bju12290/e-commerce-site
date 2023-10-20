@@ -1,7 +1,8 @@
 import './Home.css'
-import "swiper/css";
-import "swiper/css/pagination";
-import 'swiper/css/effect-coverflow';
+import "swiper/css"
+import "swiper/css/pagination"
+import 'swiper/css/effect-coverflow'
+import 'swiper/css/navigation'
 
 import Navbar from '../../components/Navbar/Navbar'
 import ProductCard from '../../components/ProductCard/ProductCard'
@@ -9,12 +10,26 @@ import Footer from '../../components/Footer/Footer'
 
 import { Link } from "react-router-dom"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { EffectCoverflow } from "swiper/modules";
+import { EffectCoverflow, Navigation } from "swiper/modules";
+import React from 'react'
+
 
 
 export default function Home(props: any) {
 
-    const screenSize = window. innerWidth
+    const [screenSize, setScreenSize] = React.useState(0)
+
+    const updateScreenSize = () => {
+        setScreenSize(window.innerWidth);
+      }
+
+      React.useEffect(() => {
+        updateScreenSize();
+        window.addEventListener('resize', updateScreenSize);
+        return () => {
+          window.removeEventListener('resize', updateScreenSize);
+        }
+      }, [])
 
     interface Product {
         id: number;
@@ -27,6 +42,14 @@ export default function Home(props: any) {
     return (
         <>
             <Navbar stripeCustomerId={props.stripeCustomerId} setStripeCustomerId={props.setStripeCustomerId} cartContents={props.cartContents} setCartContents={props.setCartContents} hasAccount={props.hasAccount} setHasAccount={props.setHasAccount} loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn}/>
+            <div className="text-nowrap hero-heading-container d-flex flex-column justify-content-center text-center">
+                <p className="h1 header-color mb-5">Your Retro Future Awaits</p>
+                <div>
+                <Link to={"/products"}>
+                    <button className="shop-btn btn btn-dark button-color">Shop Now</button>
+                </Link>
+                </div>
+            </div>
             <div className="hero d-flex justify-content-center w-100">
             <div className="row hero-image">
                 <div className="col g-0">
@@ -37,18 +60,14 @@ export default function Home(props: any) {
                 </div>
             </div>
             </div>
-            <div className="container d-flex justify-content-center">
-                <Link to={"/products"}>
-                    <button className="shop-btn btn btn-dark">Shop Now</button>
-                </Link>
-            </div>
 
             
-            <div className="text-center mt-5">
-                <h1 className="mb-5">Embroidered Patches</h1>
+            <div className="text-center carousel--container">
+                <h1 className="mb-5 header-color">Embroidered Patches</h1>
             <Swiper
                 effect={'coverflow'}
                 slidesPerView={screenSize < 900 ? 1 : 3}
+                navigation={screenSize < 900 ? true : false}
                 spaceBetween={200}
                 centeredSlides={true}
                 grabCursor={true}
@@ -60,7 +79,7 @@ export default function Home(props: any) {
                     modifier: 1,
                     slideShadows: false,
                   }}
-                modules={[EffectCoverflow]}
+                modules={[EffectCoverflow, Navigation]}
                 className="mySwiper"
             >
             {embroideredProducts.map((product: Product) => (
@@ -77,10 +96,17 @@ export default function Home(props: any) {
         ))}
         </Swiper>
         </div>
+
+        <img className="banner img-fluid w-100" src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697763601/0_3_rus5k6.png" alt="Product Banner"/>
+        <div className="d-flex flex-column align-items-center mx-5 text-center">
+            <p className="h1 header-color">Welcome to the Synthwave Wonderland</p>
+            <p className="paragraph-color">Step into a World of Synthwave Dreams, Where Past Meets Present in Every Pixel.</p>
+            <a href="/products"><button className="btn btn-dark button-color">Start Your Journey</button></a>
+        </div>
         
         <div className="d-flex justify-content-center">
-        <div className="custom--container text-center mt-5">
-                <h1 className="mb-5">New Arrivals</h1>
+        <div className="custom--container text-center">
+                <h1 className="mb-5 header-color">Our Favorites</h1>
             <div className="row">
                 <div className="col">
                     <Link to={"/product/322470759"}>
@@ -125,11 +151,6 @@ export default function Home(props: any) {
                 </div>
             </div>
         </div>
-        </div>
-        <div className="container d-flex flex-row justify-content-center">
-            <p>New Products and Discounts Right to your Inbox! </p>
-            <p>No spam, we promise!</p>
-            <input></input>
         </div>
         <Footer />
         </>

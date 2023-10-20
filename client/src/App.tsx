@@ -11,6 +11,10 @@ import CheckoutPreview from './pages/Checkout/CheckoutPreview'
 import Dashboard from './pages/User/Dashboard'
 import UserSettings from './pages/User/UserSettings'
 import OrderDetails from './pages/User/OrderDetails'
+import About from './pages/About/About'
+import Materials from './pages/About/Materials'
+import FAQs from './pages/About/FAQs'
+import Returns from './pages/About/Returns'
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false)
@@ -104,7 +108,11 @@ React.useEffect(() => {
         <Route path="/cancel" element={<Cancel/>}/>
         <Route path="/checkout" element={<CheckoutPreview cartContents={cartContents} setCartContents={setCartContents} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
         <Route path="/userSettings" element={<UserSettings stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents} stripeCustomerInfo={stripeCustomerInfo}/>}/>
-        <Route path="/order/:orderId" element={<OrderDetails stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}></Route>
+        <Route path="/order/:orderId" element={<OrderDetails stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
+        <Route path="/ourStory" element={<About loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
+        <Route path="/materials" element={<Materials stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
+        <Route path="/faq" element={<FAQs loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>} />
+        <Route path="/returns" element={<Returns loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>} />
       </Routes>
     </BrowserRouter>
     </>
