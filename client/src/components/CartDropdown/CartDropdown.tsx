@@ -1,12 +1,9 @@
 import './CartDropdown.css'
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function CartDropdown(props: any) {
-    const cartContents = props.cartContents
-    const setCartContents = props.setCartContents
 
-    console.log(cartContents)
+    const { cartContents, setCartContents } = props
 
     function increaseQty(index: number) {
         const updatedCartContents = [...cartContents]
@@ -20,7 +17,6 @@ export default function CartDropdown(props: any) {
         updatedCartContents[index].quantity--
 
         if (updatedCartContents[index].quantity <= 0) {
-            // Remove the item if quantity reaches 0
             updatedCartContents.splice(index, 1);
         }
 
@@ -31,7 +27,6 @@ export default function CartDropdown(props: any) {
     const navigate = useNavigate();
 
     const handleCheckout = () => {
-        // Navigate to checkoutPreview page with cartContents data
         navigate('/checkout', { state: { cartContents } });
     }
 
@@ -39,21 +34,21 @@ export default function CartDropdown(props: any) {
        <>
                         {cartContents.map((item: any, index: number) => {
                             return (
-                            <>
+                            <div key={item.name}>
                                 <p>{item.name + " - " + item.size + " - " + item.color}</p>
                                 <img width="50px" src={item.thumbnail_url} alt={item.name}/>
                                 <button onClick={(e) => {
-                                                e.preventDefault(); // Prevent the default button behavior
-                                                increaseQty(index);
-                                                e.stopPropagation();
+                                                e.preventDefault()
+                                                increaseQty(index)
+                                                e.stopPropagation()
                                 }}>^</button>
                                 <p>{item.quantity}</p>
                                 <button onClick={(e) => {
-                                                e.preventDefault(); // Prevent the default button behavior
-                                                decreaseQty(index);
-                                                e.stopPropagation();
+                                                e.preventDefault()
+                                                decreaseQty(index)
+                                                e.stopPropagation()
                                 }}>v</button>
-                            </>
+                            </div>
                             )
                         })}
                         {/* Pass in price from stripe to cartContents, calculate total based off of quantity */}

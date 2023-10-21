@@ -1,15 +1,10 @@
-import React from 'react'
 import Login from '../LogIn/Login'
 import AccountDropdown from '../AccountDropdown/AccountDropdown'
 import CartDropdown from '../CartDropdown/CartDropdown'
 
 export default function Navbar(props: any) {
 
-    const loggedIn = props.loggedIn
-    const setLoggedIn = props.setLoggedIn
-
-    const hasAccount = props.hasAccount
-    const setHasAccount = props.setHasAccount
+    const { loggedIn, setLoggedIn, hasAccount, setHasAccount, stripeCustomerId, setStripeCustomerId, cartContents, setCartContents } = props
 
     return (
         <>
@@ -32,7 +27,22 @@ export default function Navbar(props: any) {
                             {loggedIn ? "Manage Account" : (hasAccount ? "Login" : "Register")}
                         </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                {loggedIn ? <AccountDropdown stripeCustomerId={props.stripeCustomerId} setStripeCustomerId={props.setStripeCustomerId} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> : <Login stripeCustomerId={props.stripeCustomerId} setStripeCustomerId={props.setStripeCustomerId} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}
+                                {loggedIn ? 
+                                <AccountDropdown 
+                                    stripeCustomerId={stripeCustomerId} 
+                                    setStripeCustomerId={setStripeCustomerId} 
+                                    hasAccount={hasAccount} 
+                                    setHasAccount={setHasAccount} 
+                                    loggedIn={loggedIn} 
+                                    setLoggedIn={setLoggedIn}/> 
+                                : 
+                                <Login 
+                                    stripeCustomerId={stripeCustomerId} 
+                                    setStripeCustomerId={setStripeCustomerId} 
+                                    hasAccount={hasAccount} 
+                                    setHasAccount={setHasAccount} 
+                                    loggedIn={loggedIn} 
+                                    setLoggedIn={setLoggedIn}/>}
                             </div>
                             </li>
                     </ul>
@@ -43,7 +53,9 @@ export default function Navbar(props: any) {
                                 Cart
                             </a>
                             <div className="cart dropdown-menu dropdown-menu-end mt-3 p-3 text-center" aria-labelledby="navbarDropdown">
-                                <CartDropdown cartContents={props.cartContents} setCartContents={props.setCartContents}/>
+                                <CartDropdown 
+                                    cartContents={cartContents} 
+                                    setCartContents={setCartContents}/>
                             </div>
                         </div>
                     </ul>

@@ -28,7 +28,8 @@ export default function productsFilter(props: any) {
     <div className="container mt-5 ms-5">
         <div className="mb-3">
         <form role="search">
-            <input className="w-100" onChange={handleSearchTerm} type="search" placeholder="Search" aria-label="Search"></input>
+            <label htmlFor="search" className="visually-hidden">Search</label>
+            <input id="search" name="search" className="w-100" onChange={handleSearchTerm} type="search" placeholder="Search" aria-label="Search"></input>
         </form>
         </div>
         <div className="mb-3">

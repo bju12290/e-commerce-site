@@ -1,6 +1,15 @@
 import React from 'react'
 import axios from 'axios'
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+import { Pagination } from 'swiper/modules';
+
+import './ProductDetails.css'
+
 export default function ProductDetails(props: any) {
     const [productSize, setProductSize] = React.useState('S')
     const [productColor, setProductColor] = React.useState('Black')
@@ -8,7 +17,7 @@ export default function ProductDetails(props: any) {
 
     const setProductId = props.setProductId
     const productId = props.productId
-    setProductId(props.productId)
+    setProductId(productId)
     const stripeProductData = props.productDetails.stripeData
     const printfulProductData = props.productDetails.printfulData
     const productVariants = printfulProductData?.result?.sync_variants || []
@@ -153,20 +162,42 @@ export default function ProductDetails(props: any) {
         });
     }
 
+    const isNavy = productColor === 'Black' ? '' : '-navy'
+
+    
+
     return (
-    <div>
-        <h1>{printfulProductData ? printfulProductData.result.sync_product.name : "Loading..."}</h1>
-        <img src={printfulProductData ? printfulProductData.result.sync_product.thumbnail_url : ""}/>
-        <p>{stripeProductData ? stripeProductData.data[0].description : "Loading..."}</p>
-        <label htmlFor="sizes">Size</label>
-        <select onChange={handleSizeAndColor} id="sizes" name="sizes">
-            {SizeElements}
-        </select>
-        <label htmlFor="colors">Color</label>
-        <select onChange={handleSizeAndColor} id="colors" name="colors">
-            {ColorElements}
-        </select>
-        <button onClick={() => handleCart()} className="addToCart--button btn btn-sm btn-primary">Add to Cart</button>
+        <>
+    <div className="container-fluid product-container">
+        <div className="row">
+            <div className="col swiper-product-details">
+                <Swiper pagination={true} modules={[Pagination]} className="swiper-product-details">
+                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-1${isNavy}`} /></SwiperSlide>
+                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-2${isNavy}`} /></SwiperSlide>
+                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-3${isNavy}`} /></SwiperSlide>
+                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-4${isNavy}`} /></SwiperSlide>
+                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-5${isNavy}`} /></SwiperSlide>
+                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-6${isNavy}`} /></SwiperSlide>
+                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-7${isNavy}`} /></SwiperSlide>
+                </Swiper>
+            </div>
+            <div className="col text-center my-auto">
+                <h1 className="">{printfulProductData ? printfulProductData.result.sync_product.name : "Loading..."}</h1>
+                <p>{stripeProductData ? stripeProductData.data[0].description : "Loading..."}</p>
+                <div className="vstack w-25 mx-auto">
+                <label htmlFor="sizes">Size</label>
+                <select onChange={handleSizeAndColor} id="sizes" name="sizes">
+                    {SizeElements}
+                </select>
+                <label htmlFor="colors">Color</label>
+                <select onChange={handleSizeAndColor} id="colors" name="colors">
+                    {ColorElements}
+                </select>
+                <button onClick={() => handleCart()} className="mt-3 btn btn-sm btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
     </div>
+    </>
     )
 }

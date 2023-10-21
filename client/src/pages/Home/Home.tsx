@@ -17,6 +17,12 @@ import React from 'react'
 
 export default function Home(props: any) {
 
+    interface Product {
+        id: number;
+        name: string;
+        thumbnail_url: string;
+      }
+
     const [screenSize, setScreenSize] = React.useState(0)
 
     const updateScreenSize = () => {
@@ -31,17 +37,21 @@ export default function Home(props: any) {
         }
       }, [])
 
-    interface Product {
-        id: number;
-        name: string;
-        thumbnail_url: string;
-      }
+    
 
     const embroideredProducts = props.products.filter((product: Product) => product.name.includes("Embroidered"))
       
     return (
         <>
-            <Navbar stripeCustomerId={props.stripeCustomerId} setStripeCustomerId={props.setStripeCustomerId} cartContents={props.cartContents} setCartContents={props.setCartContents} hasAccount={props.hasAccount} setHasAccount={props.setHasAccount} loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn}/>
+            <Navbar 
+                stripeCustomerId={props.stripeCustomerId} 
+                setStripeCustomerId={props.setStripeCustomerId} 
+                cartContents={props.cartContents} 
+                setCartContents={props.setCartContents} 
+                hasAccount={props.hasAccount} 
+                setHasAccount={props.setHasAccount} 
+                loggedIn={props.loggedIn} 
+                setLoggedIn={props.setLoggedIn}/>
             <div className="text-nowrap hero-heading-container d-flex flex-column justify-content-center text-center">
                 <p className="h1 header-color mb-5">Your Retro Future Awaits</p>
                 <div>
@@ -50,15 +60,8 @@ export default function Home(props: any) {
                 </Link>
                 </div>
             </div>
-            <div className="hero d-flex justify-content-center w-100">
-            <div className="row hero-image">
-                <div className="col g-0">
-                    <img className="img-fluid" src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697591017/unisex-hooded-long-sleeve-tee-black-front-652f2eb3734c9_wuvlbq.png" />
-                </div>
-                <div className="col g-0">
-                    <img className="img-fluid" src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697592491/unisex-premium-hoodie-navy-blazer-front-652f3485d75e2_lvz0mf.png" />
-                </div>
-            </div>
+            <div className="hero d-flex justify-content-center">
+                    <img className="hero-image w-100 img-fluid" src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697845516/banner_c1h0js.jpg" />
             </div>
 
             
@@ -83,7 +86,7 @@ export default function Home(props: any) {
                 className="mySwiper"
             >
             {embroideredProducts.map((product: Product) => (
-            <SwiperSlide><div key={product.id} className="d-flex justify-content-center item">
+            <SwiperSlide key={product.id}><div className="d-flex justify-content-center item">
                 <ProductCard 
                 products={props.products}
                 productId={props.productId} setProductId={props.setProductId}
@@ -156,8 +159,3 @@ export default function Home(props: any) {
         </>
     )
 }
-
-// TO-DO:
-
-// Mailing List Section (Not Functioning)
-// Footer

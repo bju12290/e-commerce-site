@@ -7,11 +7,11 @@
 }
 
 .hero {
-    margin-top: 5rem;
+    margin-top: 4rem;
 }
 
 .hero-image {
-    width: 85vw;
+    box-shadow: 3px 3px 5px #f297c0;
 }
 
 .shop-btn {

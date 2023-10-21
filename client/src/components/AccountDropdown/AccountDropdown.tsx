@@ -18,10 +18,10 @@ export default function AccountDropdown(props: any) {
 
     return (
         <>
-            <li><Link className="dropdown-item" to={"/dashboard"}>Account</Link></li>
-            <li><Link className="dropdown-item" to={"/userSettings"}>Settings</Link></li>
-            <li><hr className="dropdown-divider"/></li>
-            <li><a className="dropdown-item" onClick={handleLogout} href="#">Sign Out</a></li>
+            <div><Link className="dropdown-item" to={"/dashboard"}>Account</Link></div>
+            <div><Link className="dropdown-item" to={"/userSettings"}>Settings</Link></div>
+            <div><hr className="dropdown-divider"/></div>
+            <div><a className="dropdown-item" onClick={handleLogout} href="#">Sign Out</a></div>
         </>
     )
 }

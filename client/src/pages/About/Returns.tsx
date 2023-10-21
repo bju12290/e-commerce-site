@@ -12,6 +12,7 @@ export default function Returns(props: any) {
             loggedIn={props.loggedIn} 
             setLoggedIn={props.setLoggedIn}
         />
+        <Footer />
         </>
     )
 }

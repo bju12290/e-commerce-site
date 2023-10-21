@@ -6,6 +6,6 @@ export default function Cart(props: any) {
 
     return (
         <CartDropdown cartContents={cartContents} setCartContents={setCartContents}/>
-        <Link to={}>Checkout</Link>
+        
     )
 }
