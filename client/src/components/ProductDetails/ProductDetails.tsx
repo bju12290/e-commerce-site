@@ -17,7 +17,6 @@ export default function ProductDetails(props: any) {
 
     const setProductId = props.setProductId
     const productId = props.productId
-    setProductId(productId)
     const stripeProductData = props.productDetails.stripeData
     const printfulProductData = props.productDetails.printfulData
     const productVariants = printfulProductData?.result?.sync_variants || []
@@ -26,11 +25,18 @@ export default function ProductDetails(props: any) {
     const products = props.products
     const cartContents = props.cartContents
     const setCartContents = props.setCartContents
+    const cartTotal = props.cartTotal
+    const setCartTotal = props.setCartTotal
+    const productPrice = printfulProductData?.result.sync_variants[0].retail_price
 
-        console.log(props.productId)
+    console.log(cartContents)
+    console.log(cartTotal)
+    console.log(productPrice)
+
 
         React.useEffect(() => {
             // Fetch popularity data from your server endpoint.
+            setProductId(productId)
             axios.get('https://localhost:3000/popularity')
               .then(response => {
                 setPopularity(response.data);
@@ -124,13 +130,20 @@ export default function ProductDetails(props: any) {
                     // If the product already exists in the cart, update its quantity.
                     const updatedCart = [...prevCartContents];
                     updatedCart[existingProductIndex].quantity += 1;
+                    updatedCart[existingProductIndex].cost += parseFloat(productPrice);
+
+                    const newTotalPrice = updatedCart.reduce((total: any, item: any) => {
+                    return total + (item.cost * item.quantity);
+                    }, 0);
+
+                    setCartTotal(newTotalPrice);
     
                     localStorage.setItem('cart', JSON.stringify(updatedCart));
                     return updatedCart;
                 } else {
                     // If the product is not in the cart, add it as a new entry with quantity 1.
                     let stripePriceId
-                    if (stripeProductData.data.length > 1) {
+                    if (stripeProductData?.data.length > 1) {
                         stripePriceId = stripeProductData?.data[1].default_price;
                     } else {
                         stripePriceId = stripeProductData?.data[0].default_price;
@@ -147,10 +160,18 @@ export default function ProductDetails(props: any) {
                         ...productToAdd,
                         quantity: 1,
                         price: stripePriceId,
+                        cost: parseFloat(productPrice),
                         size: selectedSize,
                         color: selectedColor,
                     };
+
                     const updatedCart = [...prevCartContents, newProduct];
+
+                    const newCartTotal = updatedCart.reduce((total: any, item: any) => {
+                        return total + (item.cost * item.quantity);
+                    }, 0);
+
+                    setCartTotal(newCartTotal)
     
                     localStorage.setItem('cart', JSON.stringify(updatedCart));
                     return updatedCart;
@@ -163,8 +184,6 @@ export default function ProductDetails(props: any) {
     }
 
     const isNavy = productColor === 'Black' ? '' : '-navy'
-
-    
 
     return (
         <>
@@ -193,7 +212,8 @@ export default function ProductDetails(props: any) {
                 <select onChange={handleSizeAndColor} id="colors" name="colors">
                     {ColorElements}
                 </select>
-                <button onClick={() => handleCart()} className="mt-3 btn btn-sm btn-primary">Add to Cart</button>
+                <p className="mt-3">${productPrice}</p>
+                <button onClick={() => handleCart()} className="btn btn-sm button-color">Add to Cart</button>
                 </div>
             </div>
         </div>

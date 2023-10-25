@@ -130,7 +130,7 @@ app.post('/updateCustomer', async (req, res) => {
     }}
   );
   res.json({ message: 'Stripe customer updated' });
-})
+}) 
 
 app.get('/getProductInformation', async (req, res) => {
 

@@ -7,6 +7,14 @@ html, body, #root {
     font-family: "Tilt Neon", sans-serif;
 }
 
+a:link {
+    text-decoration: none;
+}
+
+.navbar-margin{
+    margin-top: 6rem;
+}
+
 .header-color {
     color: #212D40 !important;
     text-shadow: 2px 2px 0px #5f7396;
@@ -25,4 +33,15 @@ html, body, #root {
 .button-color:hover {
     background-color:#5f7396 !important;
     color:#212D40 !important;
+}
+
+.button-color-2 {
+    background-color: #5f7396 !important;
+    color: #212D40 !important;
+    border: none !important;
+}
+
+.button-color-2:hover {
+    background-color:#12161d !important;
+    color:#5f7396 !important;
 }

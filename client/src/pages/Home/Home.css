@@ -1,7 +1,7 @@
 
 .hero-heading-container {
     position: absolute; 
-    top: 50%; 
+    top: 40%; 
     left: 50%; 
     transform: translate(-50%, -50%);
 }
@@ -44,18 +44,20 @@
 
   .banner {
     width: 101vw;
-    margin-top: 33vh;
-    margin-bottom: 8vh;
+    margin-top: 20vh;
+    margin-bottom: 13vh;
   }
 
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .hero-heading-container {
         top: 25%;
     }
+}
 
-    .hero-image {
-        width: 100vw;
+@media (max-width: 500px) {
+    .hero-heading-container {
+        top:20%;
     }
 }
 

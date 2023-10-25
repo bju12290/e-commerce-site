@@ -1,0 +1,9 @@
+.product-filter {
+    padding-top: 95px;
+}
+
+@media (max-width: 767px) {
+    .product-filter {
+        padding-top: 0px;
+    }
+}

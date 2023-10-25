@@ -1,0 +1,49 @@
+.success--popup {
+    position: fixed;
+    top: 65%;
+    left: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    background-color: #212D40;
+    color: #5f7396;
+    padding: 15px;
+    border-radius: 5px;
+    animation: fade-in 0.5s, fade-out 0.5s 3s forwards;
+    text-shadow: 1px 1px 1px #5f7396;
+    filter: drop-shadow(1px 2px 2px #333333) ;
+    text-align: center;
+  }
+  
+  .error--popup {
+    position: fixed;
+    top: 65%;
+    left: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    background-color: #f44336;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    animation: fade-in 0.5s, fade-out 0.5s 3s forwards;
+    text-shadow: 1px 1px 1px #333333;
+    filter: drop-shadow(1px 2px 2px #333333) ;
+    text-align: center;
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.8;
+    }
+  }
+  
+  @keyframes fade-out {
+    from {
+      opacity: 0.8;
+    }
+    to {
+      opacity: 0;
+    }
+  }

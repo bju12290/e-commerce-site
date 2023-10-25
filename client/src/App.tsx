@@ -12,29 +12,40 @@ import Dashboard from './pages/User/Dashboard'
 import UserSettings from './pages/User/UserSettings'
 import OrderDetails from './pages/User/OrderDetails'
 import About from './pages/About/About'
-import Materials from './pages/About/Materials'
 import FAQs from './pages/About/FAQs'
-import Returns from './pages/About/Returns'
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false)
   const [hasAccount, setHasAccount] = React.useState(false)
   const [products, setProducts] = React.useState([])
   const [cartContents, setCartContents] = React.useState([])
+  const [cartTotal, setCartTotal] = React.useState(0)
   const [productDetails, setProductDetails] = React.useState([])
   const [productId, setProductId] = React.useState(null)
   const [stripeCustomerId, setStripeCustomerId] = React.useState(null)
   const [stripeCustomerInfo, setStripeCustomerInfo] = React.useState({})
-
-  // console.log(stripeCustomerId)
+  const [updateTrigger, setUpdateTrigger] = React.useState(0)
 
       React.useEffect(() => {
         // Retrieve cart data from localStorage
         setCartContents([])
+        setHasAccount(false)
         const storedCart = localStorage.getItem('cart');
+        const storedAccountStatus = localStorage.getItem('hasAccount')
         if (storedCart) {
+            const parsedCart = JSON.parse(storedCart);
+
+            const newCartTotal = parsedCart.reduce((total: number, item: any) => {
+              return total + (item.cost * item.quantity);
+          }, 0);
+
+            setCartTotal(newCartTotal)
             setCartContents(JSON.parse(storedCart));
         }
+      if (storedAccountStatus) {
+        const parsedStatus = JSON.parse(storedAccountStatus)
+        setHasAccount(parsedStatus)
+      }
     }, []);
 
     React.useEffect(() => {
@@ -89,7 +100,7 @@ React.useEffect(() => {
             console.error('Error:', error);
           });
       }
-    }, [stripeCustomerId]);
+    }, [stripeCustomerId, updateTrigger]);
 
     // console.log(stripeCustomerInfo)
 
@@ -99,20 +110,18 @@ React.useEffect(() => {
     <>
       <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
-        <Route path="/products" element={<AllProducts setProducts={setProducts} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} productId={productId} setProductId={setProductId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>} />
-        <Route path="/product/:productId" element={<ProductPage stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} productId={productId} setProductId={setProductId} productDetails={productDetails} setProductDetails={setProductDetails} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
-        <Route path="/dashboard" element={<Dashboard stripeCustomerInfo={stripeCustomerInfo} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>} />
+        <Route path="/" element={<Home cartTotal={cartTotal} setCartTotal={setCartTotal} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
+        <Route path="/products" element={<AllProducts cartTotal={cartTotal} setCartTotal={setCartTotal} setProducts={setProducts} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} productId={productId} setProductId={setProductId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>} />
+        <Route path="/product/:productId" element={<ProductPage cartTotal={cartTotal} setCartTotal={setCartTotal} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} productId={productId} setProductId={setProductId} productDetails={productDetails} setProductDetails={setProductDetails} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
+        <Route path="/dashboard" element={<Dashboard cartTotal={cartTotal} setCartTotal={setCartTotal} stripeCustomerInfo={stripeCustomerInfo} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>} />
         <Route path="/cart"/>
-        <Route path="/success" element={<Success/>}/>
-        <Route path="/cancel" element={<Cancel/>}/>
-        <Route path="/checkout" element={<CheckoutPreview cartContents={cartContents} setCartContents={setCartContents} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
-        <Route path="/userSettings" element={<UserSettings stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents} stripeCustomerInfo={stripeCustomerInfo}/>}/>
-        <Route path="/order/:orderId" element={<OrderDetails stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
-        <Route path="/ourStory" element={<About loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
-        <Route path="/materials" element={<Materials stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
-        <Route path="/faq" element={<FAQs loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>} />
-        <Route path="/returns" element={<Returns loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>} />
+        <Route path="/success" element={<Success stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} cartTotal={cartTotal} setCartTotal={setCartTotal} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
+        <Route path="/cancel" element={<Cancel stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} cartTotal={cartTotal} setCartTotal={setCartTotal} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
+        <Route path="/checkout" element={<CheckoutPreview cartTotal={cartTotal} setCartTotal={setCartTotal} cartContents={cartContents} setCartContents={setCartContents} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
+        <Route path="/userSettings" element={<UserSettings updateTrigger={updateTrigger} setUpdateTrigger={setUpdateTrigger} cartTotal={cartTotal} setCartTotal={setCartTotal} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents} stripeCustomerInfo={stripeCustomerInfo}/>}/>
+        <Route path="/order/:orderId" element={<OrderDetails cartTotal={cartTotal} setCartTotal={setCartTotal} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
+        <Route path="/ourStory" element={<About stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} cartTotal={cartTotal} setCartTotal={setCartTotal} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
+        <Route path="/faq" element={<FAQs stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} cartTotal={cartTotal} setCartTotal={setCartTotal} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>} />
       </Routes>
     </BrowserRouter>
     </>

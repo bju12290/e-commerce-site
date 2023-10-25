@@ -1,6 +1,9 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar'
+import Footer from '../../components/Footer/Footer'
+
+import './OrderDetails.css'
 
 export default function OrderDetails(props: any) {
 
@@ -41,20 +44,38 @@ export default function OrderDetails(props: any) {
     
     console.log(orderDetails)
 
+    let date = new Date(orderDetails?.lineItems.data[0].price.created * 1000)
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
+
+    let dateStr = day + "/" + month + "/" + year;
+
+    console.log(date)
+    console.log(day)
+
     return (
         <>
-        <Navbar stripeCustomerId={props.stripeCustomerId} setStripeCustomerId={props.setStripeCustomerId} products={props.products} hasAccount={props.hasAccount} setHasAccount={props.setHasAccount} loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn} cartContents={props.cartContents} setCartContents={props.setCartContents}/>
+        <Navbar cartTotal={props.cartTotal} setCartTotal={props.setCartTotal} stripeCustomerId={props.stripeCustomerId} setStripeCustomerId={props.setStripeCustomerId} products={props.products} hasAccount={props.hasAccount} setHasAccount={props.setHasAccount} loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn} cartContents={props.cartContents} setCartContents={props.setCartContents}/>
+        <div className="navbar-margin container">
+            <p><span className="order-details-emphasis-color">Order Placed: </span>{dateStr}</p>
+            <hr/>
         {lineItems.map((item: any) => {
         
         return (
-            <div key={item.id} className="col-md-4">
-                <p>{item.description}</p>
-                <img src="" />
-                <p>Price: {makeDollars(item.amount_subtotal)}</p>
+            <div key={item.id} className="paragraph-color container">
+                <p className="order-details-emphasis-color">{item.description}</p>
+                <p><span className="order-details-emphasis-color">Price:</span> {makeDollars(item.amount_subtotal)}</p>
+                <p><span className="order-details-emphasis-color">Quantity:</span> {item.quantity}</p>
             </div>
         )})}
-        <p>Status: Processing</p>
-        <p>Order Total: {formattedSubtotal}</p>
+        <hr/>
+        <div className="paragraph-color">
+            <p><span className="order-details-emphasis-color">Status:</span> Processing</p>
+            <p><span className="order-details-emphasis-color">Order Total:</span> {formattedSubtotal}</p>
+        </div>
+        </div>
+        <Footer />
         </>
         )
 }

@@ -1,0 +1,34 @@
+.paragraph-image-1 {
+    float: right;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.paragraph-image-2 {
+    float: left;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+@media (max-width: 577px) {
+    .paragraph-image-1 {
+        float: none;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .paragraph-image-2 {
+        float: none;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 435px) {
+    .paragraph {
+        font-size: 20px;
+        text-align: center;
+    }
+}

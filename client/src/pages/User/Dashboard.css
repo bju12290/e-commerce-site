@@ -1,3 +1,15 @@
 .thumbnail-max {
     max-width: 200px;
 }
+
+.order-header-color {
+    color: #212D40 !important;
+    text-shadow: 1px 1px 0px #5f7396;
+    text-decoration: underline;
+}
+
+.order-container {
+    border: 1px solid rgba(95, 115, 150, .5);
+    border-radius: 15px;
+    margin: 15px;
+}

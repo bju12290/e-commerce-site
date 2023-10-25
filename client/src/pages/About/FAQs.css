@@ -1,0 +1,21 @@
+.contact {
+    width: 100vw;
+    height: 75vh;
+    background-color: #9dbff5;
+    margin-top: 70px;
+    color: #12161d;
+}
+
+.faq-header-2 {
+    text-align: right;
+}
+
+.answer {
+    list-style-type: '- '
+}
+
+@media (max-width: 992px) {
+    .contact {
+        margin-top: 65px;
+    }
+}

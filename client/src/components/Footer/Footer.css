@@ -1,0 +1,16 @@
+.footer-bg-color {
+    background-color: #212D40;
+}
+
+.footer-text-color {
+    color: #5f7396 !important;
+    text-shadow: 2px 2px 0px #131a25;
+}
+
+.footer-text-color-2 {
+    color: #5f7396 !important;
+}
+
+.subscribe-button {
+    width: 150px;
+}

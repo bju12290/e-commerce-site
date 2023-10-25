@@ -7,7 +7,7 @@ export default function ProductsGrid(props: any) {
 
     const [popularity, setPopularity] = React.useState({})
 
-    const { products, setProducts, sortBy, category, searchTerm } = props
+    const { products, setProducts, sortBy, category, searchTerm, productDetails } = props
 
     interface Product {
         id: number;
@@ -103,7 +103,7 @@ export default function ProductsGrid(props: any) {
             });
             setFilteredProducts(filteredProducts);
           }
-      }, [sortBy, searchTerm, products]);
+      }, [sortBy, searchTerm]);
 
       React.useEffect(() => {
         const newFilteredProducts = products.filter((product: Product) => product.name.includes(category));

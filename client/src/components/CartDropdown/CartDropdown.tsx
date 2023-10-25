@@ -1,15 +1,21 @@
 import './CartDropdown.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 export default function CartDropdown(props: any) {
 
-    const { cartContents, setCartContents } = props
+    const { cartContents, setCartContents, cartTotal, setCartTotal } = props
 
     function increaseQty(index: number) {
         const updatedCartContents = [...cartContents]
         updatedCartContents[index].quantity++
+
+        const newCartTotal = updatedCartContents.reduce((total, item) => {
+            return total + (item.cost * item.quantity);
+        }, 0);
+
         setCartContents(updatedCartContents)
-        localStorage.setItem('cart', JSON.stringify(updatedCartContents));
+        setCartTotal(newCartTotal)
+        localStorage.setItem('cart', JSON.stringify(updatedCartContents))
     }
 
     function decreaseQty(index: number) {
@@ -17,43 +23,54 @@ export default function CartDropdown(props: any) {
         updatedCartContents[index].quantity--
 
         if (updatedCartContents[index].quantity <= 0) {
-            updatedCartContents.splice(index, 1);
+            updatedCartContents.splice(index, 1)
         }
 
+        const newCartTotal = updatedCartContents.reduce((total, item) => {
+            return total + (item.cost * item.quantity);
+        }, 0);
+
+        setCartTotal(newCartTotal)
+
         setCartContents(updatedCartContents)
-        localStorage.setItem('cart', JSON.stringify(updatedCartContents));
+        localStorage.setItem('cart', JSON.stringify(updatedCartContents))
     }
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const handleCheckout = () => {
-        navigate('/checkout', { state: { cartContents } });
+        navigate('/checkout', { state: { cartContents } })
     }
 
     return (
        <>
                         {cartContents.map((item: any, index: number) => {
+                            let string = item.size + " - " + item.color + " - " + item.name
+                            let trimmedString = string.substring(0 , 25)
                             return (
-                            <div key={item.name}>
-                                <p>{item.name + " - " + item.size + " - " + item.color}</p>
-                                <img width="50px" src={item.thumbnail_url} alt={item.name}/>
-                                <button onClick={(e) => {
-                                                e.preventDefault()
-                                                increaseQty(index)
-                                                e.stopPropagation()
-                                }}>^</button>
-                                <p>{item.quantity}</p>
-                                <button onClick={(e) => {
-                                                e.preventDefault()
-                                                decreaseQty(index)
-                                                e.stopPropagation()
-                                }}>v</button>
+                            <div className="cart-text-color row" key={item.name}>
+                                <div className="col">
+                                    <p>{trimmedString}...</p>
+                                    <img width="50px" src={item.thumbnail_url} alt={item.name}/>
+                                </div>
+                                <div className="col m-auto">
+                                    <button className="btn button-color btn-sm" onClick={(e) => {
+                                                    e.preventDefault()
+                                                    increaseQty(index)
+                                                    e.stopPropagation()
+                                    }}>^</button>
+                                    <p className="m-auto">{item.quantity}</p>
+                                    <button className="btn button-color btn-sm" onClick={(e) => {
+                                                    e.preventDefault()
+                                                    decreaseQty(index)
+                                                    e.stopPropagation()
+                                    }}>v</button>
+                                </div>
                             </div>
                             )
                         })}
-                        {/* Pass in price from stripe to cartContents, calculate total based off of quantity */}
-                        <p>Total: $x.xx</p>
-                        <button onClick={handleCheckout}>Checkout</button>
+                        <p>${cartTotal?.toFixed(2)}</p>
+                        <button className="btn button-color" onClick={handleCheckout}>Checkout</button>
     </>
     )
 }

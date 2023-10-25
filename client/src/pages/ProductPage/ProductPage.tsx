@@ -10,8 +10,8 @@ export default function ProductPage(props: any) {
 
     return (
         <>
-            <Navbar stripeCustomerId={props.stripeCustomerId} setStripeCustomerId={props.setStripeCustomerId} cartContents={props.cartContents} setCartContents={props.setCartContents} hasAccount={props.hasAccount} setHasAccount={props.setHasAccount} loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn}/>
-            <ProductDetails products={props.products} cartContents={props.cartContents} setCartContents={props.setCartContents} productDetails={props.productDetails} setProductDetails={props.setProductDetails} productId={productId} setProductId={props.setProductId}/>
+            <Navbar cartTotal={props.cartTotal} setCartTotal={props.setCartTotal} stripeCustomerId={props.stripeCustomerId} setStripeCustomerId={props.setStripeCustomerId} cartContents={props.cartContents} setCartContents={props.setCartContents} hasAccount={props.hasAccount} setHasAccount={props.setHasAccount} loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn}/>
+            <ProductDetails cartTotal={props.cartTotal} setCartTotal={props.setCartTotal} products={props.products} cartContents={props.cartContents} setCartContents={props.setCartContents} productDetails={props.productDetails} setProductDetails={props.setProductDetails} productId={productId} setProductId={props.setProductId}/>
             <Footer />
         </>
     )

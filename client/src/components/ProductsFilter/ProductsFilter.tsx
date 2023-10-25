@@ -1,3 +1,7 @@
+import React from 'react'
+
+import './ProductFilter.css'
+
 export default function productsFilter(props: any) {
 
     const { sortBy, setSortBy, category, setCategory, setSearchTerm } = props
@@ -25,8 +29,8 @@ export default function productsFilter(props: any) {
     
 
     return (
-    <div className="container mt-5 ms-5">
-        <div className="mb-3">
+    <div className="product-filter sticky-top container ms-md-5 m-auto">
+        <div className="mb-3 mb-sm-3">
         <form role="search">
             <label htmlFor="search" className="visually-hidden">Search</label>
             <input id="search" name="search" className="w-100" onChange={handleSearchTerm} type="search" placeholder="Search" aria-label="Search"></input>

@@ -44,6 +44,8 @@ export default function Home(props: any) {
     return (
         <>
             <Navbar 
+                cartTotal={props.cartTotal} 
+                setCartTotal={props.setCartTotal}
                 stripeCustomerId={props.stripeCustomerId} 
                 setStripeCustomerId={props.setStripeCustomerId} 
                 cartContents={props.cartContents} 
@@ -53,7 +55,7 @@ export default function Home(props: any) {
                 loggedIn={props.loggedIn} 
                 setLoggedIn={props.setLoggedIn}/>
             <div className="text-nowrap hero-heading-container d-flex flex-column justify-content-center text-center">
-                <p className="h1 header-color mb-5">Your Retro Future Awaits</p>
+                <p className="h1 header-color mb-4">Your Retro Future Awaits</p>
                 <div>
                 <Link to={"/products"}>
                     <button className="shop-btn btn btn-dark button-color">Shop Now</button>
