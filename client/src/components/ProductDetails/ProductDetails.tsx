@@ -200,7 +200,7 @@ export default function ProductDetails(props: any) {
                     <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-7${isNavy}`} /></SwiperSlide>
                 </Swiper>
             </div>
-            <div className="col text-center my-auto">
+            <div className="col-md-5 text-center my-auto">
                 <h1 className="">{printfulProductData ? printfulProductData.result.sync_product.name : "Loading..."}</h1>
                 <p>{stripeProductData ? stripeProductData.data[0].description : "Loading..."}</p>
                 <div className="vstack w-25 mx-auto">
