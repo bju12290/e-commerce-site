@@ -6,7 +6,6 @@ export default function CheckoutPreview(props: any) {
   const { cartContents, setCartContents, cartTotal, setCartTotal } = props
 
   const stripeCustomerId = props.stripeCustomerId
-  console.log(stripeCustomerId)
 
   function increaseQty(index: number) {
     const updatedCartContents = [...cartContents]
@@ -46,8 +45,8 @@ const ButtonElement = () => {
           <form
             action={
               stripeCustomerId
-                ? `https://localhost:3000/create-checkout-session?customerId=${stripeCustomerId}`
-                : 'https://localhost:3000/create-checkout-session'
+                ? `https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/create-checkout-session?customerId=${stripeCustomerId}`
+                : 'https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/create-checkout-session'
             }
             method="POST"
           >

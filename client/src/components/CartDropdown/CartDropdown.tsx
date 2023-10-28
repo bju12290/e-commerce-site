@@ -45,8 +45,8 @@ export default function CartDropdown(props: any) {
     return (
        <>
                         {cartContents.map((item: any, index: number) => {
-                            let string = item.size + " - " + item.color + " - " + item.name
-                            let trimmedString = string.substring(0 , 25)
+                            const string = item.size + " - " + item.color + " - " + item.name
+                            const trimmedString = string.substring(0 , 25)
                             return (
                             <div className="cart-text-color row" key={item.name}>
                                 <div className="col">

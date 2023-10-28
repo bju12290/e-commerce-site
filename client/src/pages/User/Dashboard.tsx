@@ -7,16 +7,13 @@ import './Dashboard.css'
 export default function Dashboard(props: any) {
 
     const stripeCustomerId = props.stripeCustomerId
-    const setStripeCustomerId = props.setStripeCustomerId
     const stripeCustomerInfo = props.stripeCustomerInfo
-    console.log(stripeCustomerId)
-    console.log(stripeCustomerInfo)
 
     const [orderHistory, setOrderHistory] = React.useState<any[]>([])
 
     React.useEffect(() => {
         if (stripeCustomerId) { 
-            fetch(`https://localhost:3000/getOrderHistory?customerId=${stripeCustomerId}`, {
+            fetch(`https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/getOrderHistory?customerId=${stripeCustomerId}`, {
             method: 'POST', // Change the method to POST
             body: JSON.stringify({ customerId: stripeCustomerId }),
             headers: {
@@ -34,7 +31,6 @@ export default function Dashboard(props: any) {
         
     }, [stripeCustomerId]);
 
-    console.log(orderHistory)
 
     const OrderHistoryElements = () => {
         return (

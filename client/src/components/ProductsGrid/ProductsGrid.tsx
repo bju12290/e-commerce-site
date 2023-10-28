@@ -7,7 +7,7 @@ export default function ProductsGrid(props: any) {
 
     const [popularity, setPopularity] = React.useState({})
 
-    const { products, setProducts, sortBy, category, searchTerm, productDetails } = props
+    const { products, setProducts, sortBy, category, searchTerm } = props
 
     interface Product {
         id: number;
@@ -20,7 +20,7 @@ export default function ProductsGrid(props: any) {
       const [filteredProducts, setFilteredProducts] = React.useState(products);
 
       React.useEffect(() => {
-        axios.get('https://localhost:3000/popularity')
+        axios.get('https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/popularity')
           .then(response => {
             setPopularity(response.data);
           })
@@ -28,10 +28,6 @@ export default function ProductsGrid(props: any) {
             console.error('Error fetching popularity data:', error);
           });
       }, []);
-
-    
-
-      console.log(popularity)
 
       React.useEffect(() => {
         if (sortBy === "A to Z") {
@@ -83,16 +79,16 @@ export default function ProductsGrid(props: any) {
             setProducts(sortedProducts);
           } else if (sortBy === "Popularity: Low to High") {
             const sortedProducts = [...products].sort((a, b) => {
-              const popularityA = (popularity as any)[a.id]
-              const popularityB = (popularity as any)[b.id]
+              const popularityA = (popularity as any)[a.id][a.id]
+              const popularityB = (popularity as any)[b.id][b.id]
       
               return popularityA - popularityB;
             });
             setProducts(sortedProducts);
           } else if (sortBy === "Popularity: High to Low") {
             const sortedProducts = [...products].sort((a, b) => {
-              const popularityA = (popularity as any)[a.id]
-              const popularityB = (popularity as any)[b.id]
+              const popularityA = (popularity as any)[a.id][a.id]
+              const popularityB = (popularity as any)[b.id][b.id]
       
               return popularityB - popularityA;
             });

@@ -2,8 +2,14 @@ import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 
 import './FAQs.css'
+import React from 'react'
 
 export default function FAQs(props: any) {
+
+    React.useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
+
     return(
         <>
         <Navbar 
@@ -16,7 +22,7 @@ export default function FAQs(props: any) {
             loggedIn={props.loggedIn} 
             setLoggedIn={props.setLoggedIn}
         />
-        <div className="contact">
+        <div id="faq" className="contact">
             <div className="w-100 h-75 d-flex justify-content-center align-items-center flex-column">
                 <h1 className="header-color">Contact Us!</h1>
                 <h5 className="header-color">Send us an Email!</h5>

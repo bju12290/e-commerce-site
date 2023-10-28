@@ -12,7 +12,9 @@ export default function AllProducts(props: any) {
     const [category, setCategory] = React.useState('')
     const [searchTerm, setSearchTerm] = React.useState('')
 
-    console.log(searchTerm)
+    React.useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
     
     return (
         <>

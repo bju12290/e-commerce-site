@@ -9,11 +9,14 @@ export default function AccountDropdown(props: any) {
     const handleLogout = () => {
         signOut(auth)
           .then(() => {
-            // User is signed out, Firebase will manage the state
+            props.setLoggedIn(false)
+            props.setStripeCustomerId(null)
+            props.setStripeCusctomerInfo({})
           })
           .catch((error) => {
             console.error("Error: ", error)
           });
+        setTimeout(() => {window.location.reload()}, 100)
       }
 
     return (

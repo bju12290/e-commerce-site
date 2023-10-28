@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from "react-router-dom"
+import { HashLink } from 'react-router-hash-link'
 
 import './Footer.css'
 
@@ -19,9 +21,9 @@ export default function Footer() {
                 <h5>Shop</h5>
                 <ul className="nav flex-column">
                   <li className="nav-item mb-2"><a href="/" className="nav-link p-0 text-light">Home</a></li>
-                  <li className="nav-item mb-2"><a href="/products" className="nav-link p-0 text-light">Products</a></li>
-                  <li className="nav-item mb-2"><a href="/ourStory" className="nav-link p-0 text-light">Our Story</a></li>
-                  <li className="nav-item mb-2"><a href="/ourStory#ourMaterials" className="nav-link p-0 text-light">Our Materials</a></li>
+                  <li className="nav-item mb-2"><Link to={"/products"}><span className="nav-link p-0 text-light">Products</span></Link></li>
+                  <li className="nav-item mb-2"><HashLink to={"/our-story#story"}><span className="nav-link p-0 text-light">Our Story</span></HashLink></li>
+                  <li className="nav-item mb-2"><HashLink to={"/our-story#ourMaterials"}><span className="nav-link p-0 text-light">Our Materials</span></HashLink></li>
                 </ul>
               </div>
 
@@ -30,8 +32,9 @@ export default function Footer() {
                 <ul className="nav flex-column">
                   <li className="nav-item mb-2"><a href="tel:222-222-2222" className="nav-link p-0 text-light">+1 222-222-2222</a></li>
                   <li className="nav-item mb-2"><a href="mailto:support@website.com" className="nav-link p-0 text-light">support@website.com</a></li>
-                  <li className="nav-item mb-2"><a href="/faq#returns" className="nav-link p-0 text-light">Returns/Exchanges</a></li>
-                  <li className="nav-item mb-2"><a href="/faq" className="nav-link p-0 text-light">FAQs/Contact Us</a></li>
+                  <li className="nav-item mb-2"><HashLink to={"/faq#returns"}>
+                    <span className="nav-link p-0 text-light">Returns/Exchanges</span></HashLink></li>
+                  <li className="nav-item mb-2"><HashLink to={"/faq#faq"}><span className="nav-link p-0 text-light">FAQs/Contact Us</span></HashLink></li>
                 </ul>
               </div>
 

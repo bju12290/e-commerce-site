@@ -1,8 +1,14 @@
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import './About.css'
+import React from 'react'
 
 export default function About(props: any) {
+
+    React.useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
+
     return(
         <div>
         <Navbar
@@ -15,7 +21,7 @@ export default function About(props: any) {
             loggedIn={props.loggedIn} 
             setLoggedIn={props.setLoggedIn}
         />
-        <div id="ourStory" className="navbar-margin container">
+        <div id="story" className="navbar-margin container">
             <h1 className="mb-3">Our Story</h1>
             <hr/>
                     <p className="paragraph">

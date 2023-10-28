@@ -45,7 +45,7 @@ export default function UserSettings(props: any) {
 
     
         try {
-            const response = await axios.post(`https://localhost:3000/updateCustomer?customerId=${props.stripeCustomerId}`, {
+            const response = await axios.post(`https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/updateCustomer?customerId=${props.stripeCustomerId}`, {
                 userInfo: JSON.stringify(userInfo)
             });
     
@@ -60,8 +60,6 @@ export default function UserSettings(props: any) {
         setTimeout(() => {window.location.reload()}, 1000)
     };
 
-    console.log(userInfo)
-    console.log(props.stripeCustomerInfo)
 
     return (
         <>

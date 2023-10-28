@@ -2,12 +2,13 @@ import Login from '../LogIn/Login'
 import AccountDropdown from '../AccountDropdown/AccountDropdown'
 import CartDropdown from '../CartDropdown/CartDropdown'
 import icon from '../../assets/icon.png'
+import { Link } from "react-router-dom";
 
 import './Navbar.css'
 
 export default function Navbar(props: any) {
 
-    const { loggedIn, setLoggedIn, hasAccount, setHasAccount, stripeCustomerId, setStripeCustomerId, cartContents, setCartContents } = props
+    const { loggedIn, setLoggedIn, hasAccount, setHasAccount, stripeCustomerId, setStripeCustomerId, cartContents, setCartContents, setStripeCustomerInfo } = props
 
     return (
         <>
@@ -23,7 +24,7 @@ export default function Navbar(props: any) {
                             <a className="navbar-text-color nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a className="navbar-text-color nav-link" href="/products">Products</a>
+                            <Link to={"/products"}><span className="navbar-text-color nav-link" >Products</span></Link>
                         </li>
                         <li className="nav-item dropdown">
                             <a className="navbar-text-color nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,14 +33,12 @@ export default function Navbar(props: any) {
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 {loggedIn ? 
                                 <AccountDropdown 
-                                    stripeCustomerId={stripeCustomerId} 
-                                    setStripeCustomerId={setStripeCustomerId} 
-                                    hasAccount={hasAccount} 
-                                    setHasAccount={setHasAccount} 
-                                    loggedIn={loggedIn} 
-                                    setLoggedIn={setLoggedIn}/> 
+                                setLoggedIn={setLoggedIn}
+                                setStripeCustomerId={setStripeCustomerId}
+                                setStripeCustomerInfo={setStripeCustomerInfo}/> 
                                 : 
                                 <Login 
+                                    setStripeCustomerInfo={setStripeCustomerInfo}
                                     stripeCustomerId={stripeCustomerId} 
                                     setStripeCustomerId={setStripeCustomerId} 
                                     hasAccount={hasAccount} 

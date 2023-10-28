@@ -4,11 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard(props: any) {
 
-    const products = props.products
-    const cartContents = props.cartContents
-    const setCartContents = props.setCartContents
     const setProductId = props.setProductId
-    const productDetails = props.productDetails
 
     const handleProductClick = (productId: number) => {
         setProductId(productId)
@@ -25,7 +21,7 @@ export default function ProductCard(props: any) {
     }
 
     return(
-        <Link to={"/product/" + props.id} onClick={() => handleProductClick(props.id)}>
+        <Link onClick={() => handleProductClick(props.id)} to={"/product/" + props.id}>
         <div className="container text-start">
                 <img className="img-fluid" src={props.thumbnail} />
                 <p className="product-header-color h4">{props.name}</p>

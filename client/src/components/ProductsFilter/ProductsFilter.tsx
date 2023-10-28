@@ -6,8 +6,6 @@ export default function productsFilter(props: any) {
 
     const { sortBy, setSortBy, category, setCategory, setSearchTerm } = props
 
-    console.log(sortBy)
-    console.log(category)
 
     const handleCategory = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedCategory = event.target.value

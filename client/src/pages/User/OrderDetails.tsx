@@ -20,7 +20,7 @@ export default function OrderDetails(props: any) {
 
     React.useEffect(() => {
         if (orderId) { 
-            fetch(`https://localhost:3000/getOrderDetails?orderId=${orderId}`, {
+            fetch(`https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/getOrderDetails?orderId=${orderId}`, {
             headers: {
             'Content-Type': 'application/json',
             },
@@ -42,17 +42,13 @@ export default function OrderDetails(props: any) {
     const formattedSubtotal = makeDollars(subtotal)
 
     
-    console.log(orderDetails)
 
-    let date = new Date(orderDetails?.lineItems.data[0].price.created * 1000)
-    let day = date.getDate()
-    let month = date.getMonth() + 1
-    let year = date.getFullYear()
+    const date = new Date(orderDetails?.lineItems.data[0].price.created * 1000)
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const year = date.getFullYear()
 
-    let dateStr = day + "/" + month + "/" + year;
-
-    console.log(date)
-    console.log(day)
+    const dateStr = day + "/" + month + "/" + year;
 
     return (
         <>

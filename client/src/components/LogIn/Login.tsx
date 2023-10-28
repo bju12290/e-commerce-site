@@ -11,14 +11,14 @@ export default function Login(props: any) {
   const hasAccount = props.hasAccount
   const setHasAccount = props.setHasAccount
 
-  const stripeCustomerId = props.stripeCustomerId
   const setStripeCustomerId = props.setStripeCustomerId
+  const setStripeCustomerInfo = props.setStripeCustomerInfo
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, you can set your isLoggedIn state to true or perform any other actions.
       setLoggedIn(true);
-      fetch(`https://localhost:3000/getStripeCustomerId?email=${user.email}`)
+      fetch(`https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/getStripeCustomerId?email=${user.email}`)
           .then((response) => response.json())
           .then((data) => {
             setStripeCustomerId(data.id); // Adjust this according to your response structure
@@ -30,6 +30,7 @@ export default function Login(props: any) {
       // User is signed out.
       setLoggedIn(false);
       setStripeCustomerId(null);
+      setStripeCustomerInfo(null)
     }
   });
 
@@ -48,7 +49,6 @@ export default function Login(props: any) {
 
       const handleHasAccount = (e: any) => {
         setHasAccount((prevState: any) => !prevState)
-        console.log(hasAccount)
         e.stopPropagation();
         localStorage.setItem('hasAccount', JSON.stringify(!hasAccount))
       }
@@ -60,22 +60,21 @@ export default function Login(props: any) {
       const handleAuthentication = () => {
         if (hasAccount) {
           signInWithEmailAndPassword(auth, loginData.email, loginData.password)
-          .then((userCredential) => {
-          const user = userCredential.user
-          console.log("Signed In")
+          .then(() => {
+          //const user = userCredential.user
           setLoggedIn(true)
           localStorage.setItem('hasAccount', JSON.stringify(hasAccount))
         })
         .catch((error) => {
           const errorCode = error.code
           const errorMessage = error.message
+          console.error(errorCode, errorMessage)
         })} else {
           createUserWithEmailAndPassword(auth, loginData.email, loginData.password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            console.log("Account Created")
+          .then(() => {
+            //const user = userCredential.user;
             setLoggedIn(true)
-            fetch('https://localhost:3000/createCustomer', {
+            fetch('https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/createCustomer', {
               method: 'POST', // Change the method to POST
               body: JSON.stringify({ email: loginData.email }), // Send the user's email
               headers: {
@@ -83,8 +82,8 @@ export default function Login(props: any) {
               },
             })
               .then((response) => response.json())
-              .then((data) => {
-                console.log('Stripe customer created:', data);
+              .then(() => {
+                //console.log('Stripe customer created:', data);
               })
               .catch((error) => {
                 console.error('Error creating Stripe customer:', error);
@@ -93,7 +92,7 @@ export default function Login(props: any) {
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.log("Didn't work")
+            console.log(errorCode, errorMessage)
       });}}
 
         handleAuthentication()

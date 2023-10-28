@@ -1,29 +1,44 @@
 require('dotenv').config()
-const https = require('https');
+const functions = require('firebase-functions');
+const config = require('./config/default')
 const fs = require('fs');
 const express = require('express')
 const axios = require('axios')
-const cors = require('cors')
-const stripe = require('stripe')(process.env.TEST_STRIPE_API_TOKEN);
+const cors = require('cors')({ origin: true });
+const stripe = require('stripe')(config.stripeApiKey);
 const bodyParser = require('body-parser');
 const cloudinary = require('cloudinary').v2;
+const firebase = require('firebase/app');
+require('firebase/auth');
+const db = require('firebase/database');
+
+// Initialize Firebase app with your Firebase configuration
+const firebaseConfig = {
+  apiKey: config.firebaseApiKey,
+  authDomain: "ecommerce-site-584f2.firebaseapp.com",
+  databaseURL: "https://ecommerce-site-584f2-default-rtdb.firebaseio.com",
+  projectId: "ecommerce-site-584f2",
+  storageBucket: "ecommerce-site-584f2.appspot.com",
+  messagingSenderId: config.firebaseMessagingSenderId,
+  appId: config.firebaseAppId,
+  measurementId: config.firebaseMeasurementId
+};
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const database = db.getDatabase(firebaseApp);
 
 const app = express();
-
-const YOUR_DOMAIN = 'https://localhost:3000';
 
 cloudinary.config({
   secure: true
 });
 
-// Log the configuration
-console.log(cloudinary.config());
 
-app.use(cors())
+app.use(cors)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }))
-const apiKey = process.env.PRINTFUL_API_TOKEN
+const apiKey = config.printfulApiKey
 
 const createCustomer = function(email) {
     let param = {}
@@ -32,11 +47,11 @@ const createCustomer = function(email) {
 
     stripe.customers.create(param, function (err, customer) {
         if (err) {
-            console.log("Error: "+err)
+            console.error("Error: "+err)
         }if (customer) {
-            console.log("Customer Created"+ customer)
+            //console.log("Customer Created"+ customer)
         } else {
-            console.log("Something went wrong!")
+            //console.log("Something went wrong!")
         }
     })
 }
@@ -115,10 +130,8 @@ app.post('/createCustomer', async (req, res) => {
 
 app.post('/updateCustomer', async (req, res) => {
   const { customerId } = req.query
-  console.log(customerId)
   const userInfo = JSON.parse(req.body.userInfo);
-  console.log(req.body.userInfo)
-  const customer = await stripe.customers.update(
+  await stripe.customers.update(
     customerId,
     {name: userInfo.name, address: {
       city: userInfo.city,
@@ -160,69 +173,64 @@ app.get('/getProductInformation', async (req, res) => {
 })
 
 app.get('/popularity', (req, res) => {
-  // Read and send the JSON file with popularity data.
-  res.sendFile(__dirname + '/popularity.json');
+  // Reference to the 'popularity' data in your Realtime Database.
+  const ref = db.ref(database)
+  db.get(db.child(ref, `popularity`))
+  .then((snapshot) => {
+    if (snapshot.exists()) {
+      res.json(snapshot.val());
+    } else {
+      res.status(404).send('Popularity data not found');
+    }
+  })
+  .catch((error) => {
+    console.error('Error reading popularity data:', error);
+    res.status(500).send('Internal Server Error');
+  });
 });
 
 app.get('/popularity/:productId', (req, res) => {
   const productId = req.params.productId;
+  const ref = db.ref(database)
 
-  // Read the JSON file that contains popularity data.
-  fs.readFile('popularity.json', 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      res.status(500).send('Internal Server Error');
-    } else {
+  db.get(db.child(ref, `popularity/${productId}/${productId}`))
+  .then((snapshot) => {
+    if (snapshot.exists()) {
       try {
-        const popularityData = JSON.parse(data);
+        const popularityData = JSON.parse(snapshot.val());
 
         // Retrieve the popularity data for the specified product.
-        const popularity = popularityData[productId];
+        // const popularity = popularityData[productId]
 
         // Send the popularity data as a JSON response.
-        res.json(popularity);
+        res.json(popularityData);
       } catch (parseError) {
         console.error('Error parsing JSON:', parseError);
         res.status(500).send('Internal Server Error');
       }
+    } else {
+      res.status(404).send('Popularity data not found');
     }
+  })
+  .catch((error) => {
+    console.error('Error reading popularity data:', error);
+    res.status(500).send('Internal Server Error');
   });
 });
 
 app.put('/popularity/:productId', (req, res) => {
   const productId = req.params.productId;
   const { popularity } = req.body;
+  const ref = db.ref(database)
 
-  // Read the JSON file to get the current popularity data.
-  fs.readFile('popularity.json', 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      res.status(500).send('Internal Server Error');
-      return;
-    }
+  const popularityData = {};
+  popularityData[productId] = popularity;
 
-    try {
-      const popularityData = JSON.parse(data);
+  const updates = {}
+  updates['/popularity/' + productId] = popularityData
 
-      // Update the popularity value for the specified product.
-      popularityData[productId] = popularity;
-
-      // Write the updated data back to the JSON file.
-      fs.writeFile('popularity.json', JSON.stringify(popularityData, null, 2), 'utf8', (writeErr) => {
-        if (writeErr) {
-          console.error('Error writing to JSON file:', writeErr);
-          res.status(500).send('Internal Server Error');
-        } else {
-          // Respond with the updated popularity value.
-          res.json(popularity);
-        }
-      });
-    } catch (parseError) {
-      console.error('Error parsing JSON:', parseError);
-      res.status(500).send('Internal Server Error');
-    }
-  });
-});
+  db.update(ref, updates)
+})
 
 app.get('/getProductInformation/:productId', async (req, res) => {
   const productId = req.params.productId;
@@ -240,10 +248,8 @@ app.get('/getProductInformation/:productId', async (req, res) => {
 
       try {
           const stripeProductData = await stripe.products.search({
-              query: `metadata[\'productId\']:"${productId}"`,
+              query: `metadata['productId']:"${productId}"`,
           });
-
-          // Combine the data from both APIs into a single object
           const combinedData = {
               printfulData: productData,
               stripeData: stripeProductData,
@@ -261,29 +267,31 @@ app.get('/getProductInformation/:productId', async (req, res) => {
 });
 
 
-  function readCurrentOrderID() {
-    const data = fs.readFileSync('orderId.json');
-    return JSON.parse(data).currentOrderID;
-  }
+  // function readCurrentOrderID() {
+  //   const ref = db.ref(database)
+
+  //   const data = db.get(db.child(ref, `currentOrderID`))
+  //   return JSON.parse(data);
+  // }
 
   function incrementOrderID() {
-    const currentID = readCurrentOrderID();
-    const newID = currentID + 234;
-    
-    // Update the JSON file with the new ID
-    fs.writeFileSync('orderId.json', JSON.stringify({ currentOrderID: newID }));
-    
-    return newID;
+    const ref = db.ref(database)
+
+    const orderId = 0;
+    const newOrderId = orderId + 234
+
+    const updates = {}
+    updates['/currentOrderID'] = newOrderId
+
+    db.update(ref, updates)
   }
 
 app.post('/create-checkout-session', async (req, res) => {
 
   const newOrderID = incrementOrderID();
-  console.log(`New Order ID: ${newOrderID}`);
 
   const customerId = req.query.customerId
   const cartContents = JSON.parse(req.body.cartContents);
-  console.log(customerId)
   const lineItems = [];
   let colors = ''
   let sizes = ''
@@ -325,36 +333,16 @@ app.post('/create-checkout-session', async (req, res) => {
       },
     },
     mode: 'payment',
-    success_url: `http://localhost:5173/success`,
-    cancel_url: `http://localhost:5173/cancel`,
+    success_url: `https://ecommerce-site-584f2.web.app/success`,
+    cancel_url: `https://ecommerce-site-584f2.web.app/cancel`,
   };
 
   if (customerId) {
     sessionOptions.customer = customerId;
   }
-  console.log(sessionOptions)
 
     const session = await stripe.checkout.sessions.create(sessionOptions);
     res.redirect(303, session.url);
   });
 
-const sslOptions = {
-    key: fs.readFileSync('./key.pem'),
-    cert: fs.readFileSync('./cert.pem')
-};
-
-console.log('SSL Options:', sslOptions);
-
-const port = 3000
-
-const server = https.createServer(sslOptions, app);
-
-server.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-    if(process.env.PRINTFUL_API_TOKEN && process.env.TEST_STRIPE_API_TOKEN) { 
-        console.log('Printful API Token and Test Stripe API Token Set Successfully!')
-    }
-    else { 
-        console.log('One ore more of the tokens were not set successfully!')
-    }
-})
+exports.api = functions.https.onRequest(app);

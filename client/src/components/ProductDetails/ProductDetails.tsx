@@ -13,7 +13,8 @@ import './ProductDetails.css'
 export default function ProductDetails(props: any) {
     const [productSize, setProductSize] = React.useState('S')
     const [productColor, setProductColor] = React.useState('Black')
-    const [popularity, setPopularity] = React.useState({})
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_popularity, setPopularity] = React.useState({})
 
     const setProductId = props.setProductId
     const productId = props.productId
@@ -23,21 +24,15 @@ export default function ProductDetails(props: any) {
     const sizes: Array<string> = []
     const colors: Array<string> = []
     const products = props.products
-    const cartContents = props.cartContents
     const setCartContents = props.setCartContents
-    const cartTotal = props.cartTotal
     const setCartTotal = props.setCartTotal
     const productPrice = printfulProductData?.result.sync_variants[0].retail_price
-
-    console.log(cartContents)
-    console.log(cartTotal)
-    console.log(productPrice)
 
 
         React.useEffect(() => {
             // Fetch popularity data from your server endpoint.
             setProductId(productId)
-            axios.get('https://localhost:3000/popularity')
+            axios.get('https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/popularity')
               .then(response => {
                 setPopularity(response.data);
               })
@@ -52,7 +47,7 @@ export default function ProductDetails(props: any) {
         
           const incrementPopularity = (productID: any) => {
             // Fetch the current popularity value from the server.
-            axios.get(`https://localhost:3000/popularity/${productID}`)
+            axios.get(`https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/popularity/${productID}`)
               .then(response => {
                 const currentPopularity = response.data;
         
@@ -61,7 +56,7 @@ export default function ProductDetails(props: any) {
         
                 // Update the popularity value on the client-side.
                 // You can display this updated popularity value in your component.
-                console.log('Updated Popularity:', updatedPopularity);
+                //console.log('Updated Popularity:', updatedPopularity);
         
                 // Send the updated popularity value to the server.
                 updatePopularityOnServer(productID, updatedPopularity);
@@ -73,10 +68,7 @@ export default function ProductDetails(props: any) {
         
           const updatePopularityOnServer = (productID: any, updatedPopularity: any) => {
             // Send a PUT request to update the popularity on the server.
-            axios.put(`https://localhost:3000/popularity/${productID}`, { popularity: updatedPopularity })
-              .then(response => {
-                console.log('Popularity data updated on the server:', response.data);
-              })
+            axios.put(`https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/popularity/${productID}`, { popularity: updatedPopularity })
               .catch(error => {
                 console.error('Error updating popularity on the server:', error);
               });
@@ -153,8 +145,6 @@ export default function ProductDetails(props: any) {
                     if (selectedColor === "Navy Blazer") {
                         stripePriceId = stripeProductData?.data[0].default_price;
                     }
-
-                    console.log(stripePriceId)
 
                     const newProduct = {
                         ...productToAdd,

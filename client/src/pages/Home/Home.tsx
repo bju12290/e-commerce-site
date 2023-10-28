@@ -101,8 +101,9 @@ export default function Home(props: any) {
         ))}
         </Swiper>
         </div>
-
-        <img className="banner img-fluid w-100" src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697763601/0_3_rus5k6.png" alt="Product Banner"/>
+        <div className="d-flex align-items-center justify-content-center">
+        <img className="banner img-fluid" src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697763601/0_3_rus5k6.png" alt="Product Banner"/>
+        </div>
         <div className="d-flex flex-column align-items-center mx-5 text-center">
             <p className="h1 header-color">Welcome to the Synthwave Wonderland</p>
             <p className="paragraph-color">Step into a World of Synthwave Dreams, Where Past Meets Present in Every Pixel.</p>
