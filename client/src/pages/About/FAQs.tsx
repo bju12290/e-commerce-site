@@ -13,6 +13,7 @@ export default function FAQs(props: any) {
     return(
         <>
         <Navbar 
+            setStripeCustomerInfo={props.setStripeCustomerInfo}
             cartTotal={props.cartTotal} 
             setCartTotal={props.setCartTotal}
             stripeCustomerId={props.stripeCustomerId} 
