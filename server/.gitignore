@@ -3,5 +3,6 @@ node_modules
 *.pem
 orderId.json
 /config/default.js
+/src/utils/firebase.tsx
 
 pack
