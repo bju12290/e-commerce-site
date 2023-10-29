@@ -1,9 +1,6 @@
 # E-Commerce Site
-***
 
-***
 ## Usage
-***
 You can test the application yourself at [this link](https://ecommerce-site-584f2.web.app/).
 
 Stripe is intentionally left in test mode so anyone can test full site functionality without having to make an actual purchase. 
@@ -12,12 +9,11 @@ If you wish to test out an order, use card number: 4242 4242 4242 4242. The rest
 
 If you wish to test out authentication and order history functionaly, you can simply create an account and then make a purchase using the test card number provided above. After doing so, head to the Dashboard and you'll be able to see any orders placed. 
 
-***
+
 ## Visuals
-***
 
 ## Technologies Used
-***
+
 ### Frontend Development
 
  - [Vite](https://vitejs.dev/): A build tool that offers fast development and optimized production builds for modern web applications. Used for clientside development and building.
@@ -33,23 +29,23 @@ If you wish to test out authentication and order history functionaly, you can si
   - [Printful API](https://developers.printful.com/docs/): A tool that allows e-commerce businesses to integrate and automate the printing and fulfillment of custom products into their online stores, streamlining the order processing and shipping of these personalized items. Used to handle product information, as well as occasionally serve "thumbnail" images throughout the site.
 
  ## Project Structure
- ***
+ 
 - **'components/'**: This directory serves as a container for both reusable components and complex single-use components. Each component has it's own corresponding folder in the directory, and if applicable is stored with it's corresponding CSS file. These components are served to our **'/pages/'**.
 - **'pages/'**: This directory serves as a container for all pages throughout the site. All pages have a corresponding folder inside the **'pages/'** directory, except for the **'User/'**, **'About/'**, and **'Checkout/'** directories.
     - **'User/'**: Contains pages related to the user, namely the User Dashboard, User Settings, and Order Details pages.
     - **'About/'**: Containes pages related to the about for the e-commerce store including Contact, FAQ, and information regarding the story and materials of the shop.
     - **'Checkout/'**: Contains the pages used for checkout flow, namely our Checkout Preview page, our Successful Checkout page, and our Checkout Canceled page.
 
-***
+
 
  #### Contact Information
-***
+
 Feel free to contact via email! 
 
 ```brian.phartnettjr@gmail.com```
 
  #### Known Issues
- ***
+
  - No known issues at this time. If you find one let me know! :)
 
  #### Future Improvements
