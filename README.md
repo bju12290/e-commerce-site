@@ -19,10 +19,11 @@ If you wish to test out authentication and order history functionaly, you can si
  - [Vite](https://vitejs.dev/): A build tool that offers fast development and optimized production builds for modern web applications. Used for clientside development and building.
  - [React](https://react.dev/): A JavaScript library for building user interfaces, allowing for the creation of dynamic and interactive components. Used throughout the application for a wide variety of functionality.
  - [Bootstrap](https://getbootstrap.com/): A front-end framework that provides pre-designed UI components and responsive layout utilities. Used throughout the application to ensure it stays pretty on all screen sizes.
- - [React Router](https://reactrouter.com/en/main): A routing library for React applications, enabling navigation between different pages and views. Used to manage all "pages" throughout the application.
+ - [React Router](https://reactrouter.com/en/main): A routing library for React applications, enabling navigation between different pages and views. Used to manage all pages throughout the application.
 
  ### Backend Services
 
+ - [Firebase Cloud Functions](https://firebase.google.com/docs/functions): Serverless functions that allow you to run custom code in response to events in your Firebase project, providing a way to extend and automate the functionality of your application. Firebase Cloud Functions host all server-side functionality for the application.
  - [Firebase Authentication](https://firebase.google.com/docs/auth): Allows developers to easily integrate secure user sign-up, sign-in, and identity management into their web and mobile applications. Does the heavy lifting in terms of account creation and signing in.  
  - [Firebase Realtime Database](https://firebase.google.com/docs/database): A NoSQL cloud database from Google's Firebase platform that enables real-time data synchronization across web and mobile applications. Used to keep track of product popularity, and clientside order IDs.
  - [Stripe API](https://stripe.com/docs/api): A payment processing interface that enables businesses to securely accept online payments, manage subscriptions, and handle various financial transactions in their web and mobile applications. Handles checkout flow, pricing, and user data for the e-commerce site.
