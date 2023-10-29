@@ -7,7 +7,7 @@ Stripe is intentionally left in test mode so anyone can test full site functiona
 
 If you wish to test out an order, use card number: 4242 4242 4242 4242. The rest of the details can be anything. The payment will succeed, and you will be able to preview the checkout flow.
 
-If you wish to test out authentication and order history functionaly, you can simply create an account and then make a purchase using the test card number provided above. After doing so, head to the Dashboard and you'll be able to see any orders placed. 
+If you wish to test out authentication and order history functionality, you can simply create an account and then make a purchase using the test card number provided above. After doing so, head to the Dashboard and you'll be able to see any orders placed. 
 
 ## Technologies Used
 
