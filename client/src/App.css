@@ -1,10 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
 
-
-
 html, body, #root {
-    background-color: idk;
     font-family: "Tilt Neon", sans-serif;
+    display: swap;
 }
 
 a:link {

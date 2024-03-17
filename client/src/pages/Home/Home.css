@@ -29,6 +29,7 @@
 }
 
 .carousel--container {
+    min-height: calc(800px + 4rem);
     margin-top: 10vh;
 }
 
@@ -41,17 +42,37 @@
 .hoverzoom:hover {
     transform: scale(1.2);
 }
+.banner-container {
+    position: relative;
+    width: 100%;
+}
 
-  .banner {
-    width: 101vw;
-    margin-top: 20vh;
-    margin-bottom: 13vh;
-  }
+.cta-container{
+    margin-top: 50vh;
+}
 
+.banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
-  @media (max-width: 900px) {
+.banner-text{
+    margin-top:30rem;
+}
+@media (max-width: 1400px) {
+    .carousel--container {
+        min-height: calc(500px + 4rem);
+    }
+}
+@media (max-width: 900px) {
     .hero-heading-container {
         top: 25%;
+    }
+    .cta-container{
+        margin-top: 25vh;
     }
 }
 

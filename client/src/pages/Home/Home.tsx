@@ -64,7 +64,7 @@ export default function Home(props: any) {
                 </div>
             </div>
             <div className="hero d-flex justify-content-center">
-                    <img className="hero-image w-100 img-fluid" src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697845516/banner_c1h0js.jpg" />
+                    <img width="2000" height="800" className="hero-image w-100 img-fluid" src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697845516/banner_c1h0js.jpg" />
             </div>
 
             
@@ -102,10 +102,10 @@ export default function Home(props: any) {
         ))}
         </Swiper>
         </div>
-        <div className="d-flex align-items-center justify-content-center">
-        <img className="banner img-fluid" src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697763601/0_3_rus5k6.png" alt="Product Banner"/>
+        <div className="banner-container d-flex align-items-center justify-content-center">
+            <img width="2448" height="496" className="banner img-fluid" src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697763601/0_3_rus5k6.png" alt="Product Banner"/>
         </div>
-        <div className="d-flex flex-column align-items-center mx-5 text-center">
+        <div className="cta-container d-flex flex-column align-items-center mx-5 text-center">
             <p className="h1 header-color">Welcome to the Synthwave Wonderland</p>
             <p className="paragraph-color">Step into a World of Synthwave Dreams, Where Past Meets Present in Every Pixel.</p>
             <a href="/products"><button className="btn btn-dark button-color">Start Your Journey</button></a>

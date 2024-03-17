@@ -23,7 +23,7 @@ export default function ProductCard(props: any) {
     return(
         <Link onClick={() => handleProductClick(props.id)} to={"/product/" + props.id}>
         <div className="container text-start">
-                <img className="img-fluid" src={props.thumbnail} />
+                <img width="800" height="800" className="img-fluid" src={props.thumbnail} />
                 <p className="product-header-color h4">{props.name}</p>
                 <p className="paragraph-color">{getPrice()}</p>
         </div>

@@ -2,3 +2,11 @@
     color: #212D40 !important;
     text-shadow: 1px 1px 0px #5f7396;
 }
+
+.info--swiper--container{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    min-height: calc(800px + 4rem); /* Example: 800px for the image and an estimated height for text */
+}

@@ -1,7 +1,6 @@
 require('dotenv').config()
 const functions = require('firebase-functions');
 const config = require('./config/default')
-const fs = require('fs');
 const express = require('express')
 const axios = require('axios')
 const cors = require('cors')({ origin: true });
@@ -218,7 +217,7 @@ app.get('/popularity/:productId', (req, res) => {
   });
 });
 
-app.put('/popularity/:productId', (req, res) => {
+app.put('/popularity/:productId', (req) => {
   const productId = req.params.productId;
   const { popularity } = req.body;
   const ref = db.ref(database)

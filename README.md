@@ -48,6 +48,10 @@ Feel free to contact via email!
 
  #### Future Improvements
  - Add Images to Individual Order History Pages.
+ - Notification/Count for when an item is added to cart
+ - Loading Animations Instead of Showing 'Loading...' Text
+ - Dropdown Menu Improvements (Sign In/Log In/Cart)
+ - Faster Home Page Image Load Times or a Loading Animation
 
 
 
