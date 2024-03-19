@@ -1,7 +1,6 @@
 import Login from '../LogIn/Login'
 import AccountDropdown from '../AccountDropdown/AccountDropdown'
 import CartDropdown from '../CartDropdown/CartDropdown'
-import icon from '../../assets/icon.png'
 import { Link } from "react-router-dom";
 
 import './Navbar.css'
@@ -14,7 +13,7 @@ export default function Navbar(props: any) {
         <>
             <nav className="fixed-top navbar navbar-bg-color navbar-expand-lg">
             <div className="nm container-fluid">
-                <a className="navbar-brand navbar-text-color" href="/"><img className="ms-2" width="40" height="40" src={icon}/></a>
+                <a className="navbar-brand navbar-text-color" href="/"><img className="ms-2" width="40" height="40" src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1710800092/ecommerce-site-icon_gb9if3.png" alt="Synthwave Shop Navbar Icon"/></a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-dark navbar-toggler-icon"></span>
                 </button>
