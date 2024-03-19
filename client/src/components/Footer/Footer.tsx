@@ -18,7 +18,7 @@ export default function Footer() {
           <footer className="py-5">
             <div className="footer-text-color row">
               <div className="col-6 col-md-2 mb-3">
-                <h5>Shop</h5>
+                <p className="h5">Shop</p>
                 <ul className="nav flex-column">
                   <li className="nav-item mb-2"><a href="/" className="nav-link p-0 text-light">Home</a></li>
                   <li className="nav-item mb-2"><Link to={"/products"}><span className="nav-link p-0 text-light">Products</span></Link></li>
@@ -28,7 +28,7 @@ export default function Footer() {
               </div>
 
               <div className="col-6 col-md-2 mb-3">
-                <h5>Help</h5>
+                <p className="h5">Help</p>
                 <ul className="nav flex-column">
                   <li className="nav-item mb-2"><a href="tel:222-222-2222" className="nav-link p-0 text-light">+1 222-222-2222</a></li>
                   <li className="nav-item mb-2"><a href="mailto:support@website.com" className="nav-link p-0 text-light">support@website.com</a></li>
@@ -41,7 +41,7 @@ export default function Footer() {
 
               <div className="col-md-5 offset-md-1 mb-3">
                 <form>
-                  <h5>Subscribe to our newsletter</h5>
+                  <p className="h5">Subscribe to our newsletter</p>
                   <p className="white">New Products and Exclusive Discounts Straight to your Inbox!</p>
                   <div className="d-flex flex-column flex-sm-row w-100 gap-2">
                     <label htmlFor="newsletter1" className="visually-hidden">Email address</label>

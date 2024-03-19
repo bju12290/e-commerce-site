@@ -13,10 +13,17 @@ import OrderDetails from './pages/User/OrderDetails'
 import About from './pages/About/About'
 import FAQs from './pages/About/FAQs'
 
+interface Product {
+  id: string;
+  name: string;
+  thumbnail_url: string; 
+  optimized_thumbnail_url: string; 
+}
+
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false)
   const [hasAccount, setHasAccount] = React.useState(false)
-  const [products, setProducts] = React.useState([])
+  const [products, setProducts] = React.useState<Product[]>([])
   const [cartContents, setCartContents] = React.useState([])
   const [cartTotal, setCartTotal] = React.useState(0)
   const [productDetails, setProductDetails] = React.useState([])
@@ -48,18 +55,32 @@ function App() {
     }, []);
 
     React.useEffect(() => {
-        fetch('https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/getProductInformation')
+      fetch('https://us-central1-ecommerce-site-584f2.cloudfunctions.net/api/getProductInformation')
             .then(response => response.json())
             .then(data => {
-                const formattedProducts = data.result.map((item: any) => ({
-                    id: item.id,
-                    name: item.name,
-                    thumbnail_url: item.thumbnail_url
-                }))
-                setProducts(formattedProducts)
+                const cloudinaryBaseUrl = "https://res.cloudinary.com/ddv5jvvvg/image/fetch/f_auto/";
+
+                const formattedProducts: Product[] = data.result.map((item: any) => {
+                    const optimized_thumbnail_url = `${cloudinaryBaseUrl}${encodeURIComponent(item.thumbnail_url)}`;
+
+                    return {
+                        id: item.id,
+                        name: item.name,
+                        thumbnail_url: item.thumbnail_url,
+                        optimized_thumbnail_url, 
+                    };
+                });
+
+                // Preloading images if necessary - optional based on your use case
+                formattedProducts.forEach(product => {
+                    const img = new Image();
+                    img.src = product.optimized_thumbnail_url; // Preload the optimized image
+                });
+
+                setProducts(formattedProducts);
             })
             .catch(error => {
-                console.error(error)
+                console.error(error);
             });
     }, []);
 

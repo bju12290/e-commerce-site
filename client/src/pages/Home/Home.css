@@ -8,10 +8,19 @@
 
 .hero {
     margin-top: 4rem;
+    position: relative;
+    width: 100%;
+    padding-top: 45%;
+    z-index: -1;
 }
 
 .hero-image {
     box-shadow: 3px 3px 5px #f297c0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
 }
 
 .shop-btn {
@@ -49,6 +58,7 @@
 
 .cta-container{
     margin-top: 50vh;
+    z-index: 999;
 }
 
 .banner {
@@ -69,16 +79,29 @@
 }
 @media (max-width: 900px) {
     .hero-heading-container {
-        top: 25%;
+        top: 35%;
     }
     .cta-container{
         margin-top: 25vh;
     }
 }
 
+@media (max-width: 768px) { /* Adjust this value based on your mobile breakpoint */
+    .hero-image {
+      min-width: auto; /* Fixed width for mobile */
+      height: 850px; /* Fixed height for mobile */
+    }
+    .carousel--container {
+        margin-top:60vh;
+    }
+  }
+
 @media (max-width: 500px) {
     .hero-heading-container {
-        top:20%;
+        top:45%
+    }
+    .carousel--container {
+        margin-top:50vh;
     }
 }
 

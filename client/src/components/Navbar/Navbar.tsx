@@ -48,7 +48,7 @@ export default function Navbar(props: any) {
                             </li>
                     </ul>
 
-                    <ul className="navbar-nav">
+                    <div className="navbar-nav">
                         <div className="m-2 nav-item dropdown">
                             <a className="navbar-text-color nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Cart
@@ -63,7 +63,7 @@ export default function Navbar(props: any) {
                                 </div>
                             </div>
                         </div>
-                    </ul>
+                    </div>
                 </div>
             </div>
             </nav>

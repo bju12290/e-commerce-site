@@ -18,9 +18,10 @@ import React from 'react'
 export default function Home(props: any) {
 
     interface Product {
-        id: number;
+        id: string;
         name: string;
-        thumbnail_url: string;
+        thumbnail_url: string; 
+        optimized_thumbnail_url: string; 
       }
 
     const [screenSize, setScreenSize] = React.useState(0)
@@ -66,6 +67,14 @@ export default function Home(props: any) {
             <div className="hero d-flex justify-content-center">
                 <picture>
                     <source
+                        media="(max-width: 768px)"
+                        type="image/avif"
+                        srcSet="https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif/banner_mobile_t12t8l.jpg"/>
+                    <source
+                        media="(max-width: 768px)"
+                        type="image/webp"
+                        srcSet="https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp/banner_mobile_t12t8l.jpg"/>
+                    <source
                         type="image/avif"
                         srcSet="https://res.cloudinary.com/ddv5jvvvg/image/upload/c_scale,w_300,f_avif/banner_c1h0js.jpg 300w,
                                 https://res.cloudinary.com/ddv5jvvvg/image/upload/c_scale,w_1180,f_avif/banner_c1h0js.jpg 1180w,
@@ -83,7 +92,13 @@ export default function Home(props: any) {
                         sizes="100vw" />
                     <img alt="A banner with colorful retro geometrical shapes and two men sporting clothing from the Synthwave Shop's catalogue."
                         width="2000" height="800" className="hero-image w-100 img-fluid"
-                        src="https://res.cloudinary.com/ddv5jvvvg/image/upload/f_auto/v1697845516/banner_c1h0js.jpg"/>
+                        srcSet="
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/w_300/v1697845516/banner_c1h0js.jpg 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1180/v1697845516/banner_c1h0js.jpg 1180w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1640/v1697845516/banner_c1h0js.jpg 1640w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/w_2000/v1697845516/banner_c1h0js.jpg 2000w"
+                        sizes="100vw"
+                        src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697845516/banner_c1h0js.jpg"/>
                 </picture>
             </div>
 
@@ -117,7 +132,7 @@ export default function Home(props: any) {
                 setCartContents={props.setCartContents}
                 id={product.id}
                 name={product.name}
-                thumbnail={product.thumbnail_url}/>
+                thumbnail={product.optimized_thumbnail_url}/>
             </div></SwiperSlide>
         ))}
         </Swiper>
@@ -141,6 +156,7 @@ export default function Home(props: any) {
                             https://res.cloudinary.com/ddv5jvvvg/image/upload/w_2448/f_webp/v1697763601/0_3_rus5k6.png 2448w"
                     sizes="100vw" />
                 <img width="2448" height="496" className="banner img-fluid"
+                    loading="lazy"
                     src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697763601/0_3_rus5k6.png"
                     alt="Product Banner"/>
             </picture>
@@ -175,10 +191,11 @@ export default function Home(props: any) {
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1640/v1697676056/mens-classic-tee-black-front-65306ddb3fcfc_dgxzsi-Transparent1_ogpt7v.webp 1640w"
                             sizes="(min-width: 720px) calc(30vw - 80px), (min-width: 480px) calc(45vw - 76px), calc(90vw - 64px)"/>
                         <img className="hoverzoom img-fluid"
+                            loading="lazy"
                             src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697676056/mens-classic-tee-black-front-65306ddb3fcfc_dgxzsi-Transparent1_ogpt7v.png"
                             alt="Synthwave Sunset Tee Black Front."
                             width="1640"
-                            height="auto"/>
+                            height="1640"/>
                     </picture>
                     </Link>
                 </div>
@@ -201,7 +218,8 @@ export default function Home(props: any) {
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1420/v1697164388/unisex-premium-hoodie-navy-blazer-front-6528a9041cbb4_nsre0b.webp 1420w,
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1640/v1697164388/unisex-premium-hoodie-navy-blazer-front-6528a9041cbb4_nsre0b.webp 1640w"
                             sizes="(min-width: 720px) calc(30vw - 80px), (min-width: 480px) calc(45vw - 76px), calc(90vw - 64px)" />
-                        <img width="1640" height="auto" className="hoverzoom img-fluid" 
+                        <img width="1640" height="1640" className="hoverzoom img-fluid" 
+                            loading="lazy"
                             alt="Synthwave Sunset Embroidered Patch Hoodie Navy Front."
                             src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697164388/unisex-premium-hoodie-navy-blazer-front-6528a9041cbb4_nsre0b.jpg" />
                     </picture></Link>
@@ -225,7 +243,8 @@ export default function Home(props: any) {
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1420/v1697153398/unisex-fleece-sweatpants-black-front-65287fdd9786f_feyaza.webp 1420w,
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1640/v1697153398/unisex-fleece-sweatpants-black-front-65287fdd9786f_feyaza.webp 1640w"
                             sizes="(min-width: 720px) calc(30vw - 80px), (min-width: 480px) calc(45vw - 76px), calc(90vw - 64px)" />
-                        <img width="1640" height="auto" className="hoverzoom img-fluid" 
+                        <img width="1640" height="1640" className="hoverzoom img-fluid" 
+                            loading="lazy"
                             alt="Synthwave Mountain Landscape Unisex Fleece Sweatpants Black Front"
                             src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697153398/unisex-fleece-sweatpants-black-front-65287fdd9786f_feyaza.jpg" />
                     </picture></Link>
@@ -251,7 +270,8 @@ export default function Home(props: any) {
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1420/v1697677542/unisex-fleece-sweatpants-black-front-653080d9a6c48_eup2wf.webp 1420w,
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1640/v1697677542/unisex-fleece-sweatpants-black-front-653080d9a6c48_eup2wf.webp 1640w"
                             sizes="(min-width: 720px) calc(30vw - 80px), (min-width: 480px) calc(45vw - 76px), calc(90vw - 64px)" />
-                        <img width="1640" height="auto" className="hoverzoom img-fluid"
+                        <img width="1640" height="1640" className="hoverzoom img-fluid"
+                            loading="lazy"
                             alt="Synthwave Arcade Cabinet Embroidered Patch Unisex Fleece Sweatpants Black Front"
                             src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697677542/unisex-fleece-sweatpants-black-front-653080d9a6c48_eup2wf.png" />
                     </picture></Link>
@@ -275,7 +295,8 @@ export default function Home(props: any) {
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1420/v1697676194/unisex-hooded-long-sleeve-tee-black-right-front-65287ee63ea8b_lnxt95-Transparent_ssmceu.webp 1420w,
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1640/v1697676194/unisex-hooded-long-sleeve-tee-black-right-front-65287ee63ea8b_lnxt95-Transparent_ssmceu.webp 1640w"
                             sizes="(min-width: 720px) calc(30vw - 80px), (min-width: 480px) calc(45vw - 76px), calc(90vw - 64px)" />
-                        <img width="1640" height="auto" className="hoverzoom img-fluid"
+                        <img width="1640" height="1640" className="hoverzoom img-fluid"
+                            loading="lazy"
                             alt="Synthwave Sunset Unisex Hooded Long Sleeve Tee Black Right Front"
                             src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697676194/unisex-hooded-long-sleeve-tee-black-right-front-65287ee63ea8b_lnxt95-Transparent_ssmceu.png" />
                     </picture></Link>
@@ -300,9 +321,10 @@ export default function Home(props: any) {
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1640/v1697673876/mens-classic-tee-navy-front-65307288f0f38_wvpjes.webp 1640w"
                             sizes="(min-width: 720px) calc(30vw - 80px), (min-width: 480px) calc(45vw - 76px), calc(90vw - 64px)" />
                         <img className="hoverzoom img-fluid"
+                            loading="lazy"
                             src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697673876/mens-classic-tee-navy-front-65307288f0f38_wvpjes.jpg"
                             alt="Synthwave Arcade Cabinet Embroidered Patch Men's Classic Tee Navy Front"
-                            width="1640" height="auto" />
+                            width="1640" height="1640" />
                     </picture></Link>
                 </div>
             </div>
@@ -328,9 +350,10 @@ export default function Home(props: any) {
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1640/v1697676422/unisex-premium-hoodie-navy-blazer-front-6528a54151369_fmuiqp-Transparent_f1pjuw.webp 1640w"
                             sizes="(min-width: 720px) calc(30vw - 80px), (min-width: 480px) calc(45vw - 76px), calc(90vw - 64px)" />
                         <img className="hoverzoom img-fluid"
+                            loading="lazy"
                             src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697676422/unisex-premium-hoodie-navy-blazer-front-6528a54151369_fmuiqp-Transparent_f1pjuw.png"
                             alt="Synthwave Arcade Cabinet Embroidered Patch Unisex Premium Hoodie Navy Blazer Front"
-                            width="1640" height="auto" />
+                            width="1640" height="1640" />
                     </picture></Link>
                 </div>
                 <div className="col">
@@ -353,9 +376,10 @@ export default function Home(props: any) {
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1640/v1697676375/mens-classic-tee-black-front-6528ad0bc8455_rktono-Transparent_ssurmb.webp 1640w"
                             sizes="(min-width: 720px) calc(30vw - 80px), (min-width: 480px) calc(45vw - 76px), calc(90vw - 64px)" />
                         <img className="hoverzoom img-fluid"
+                            loading="lazy"
                             src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697676375/mens-classic-tee-black-front-6528ad0bc8455_rktono-Transparent_ssurmb.png"
                             alt="Synthwave Cityscape Embroidered Patch Men's Classic Tee Black Front"
-                            width="1640" height="auto" />
+                            width="1640" height="1640" />
                     </picture></Link>
                 </div>
                 <div className="col">
@@ -378,9 +402,10 @@ export default function Home(props: any) {
                                     https://res.cloudinary.com/ddv5jvvvg/image/upload/w_1640/v1697676300/unisex-fleece-sweatpants-black-front-6528b1922dda2_zqrdqp-Transparent_zlpkvq.webp 1640w"
                             sizes="(min-width: 720px) calc(30vw - 80px), (min-width: 480px) calc(45vw - 76px), calc(90vw - 64px)" />
                         <img className="hoverzoom img-fluid"
+                            loading="lazy"
                             src="https://res.cloudinary.com/ddv5jvvvg/image/upload/v1697676300/unisex-fleece-sweatpants-black-front-6528b1922dda2_zqrdqp-Transparent_zlpkvq.png"
                             alt="Synthwave Vinyl Record Unisex Fleece Sweatpants Black Front"
-                            width="1640" height="auto" />
+                            width="1640" height="1640" />
                     </picture>
                     </Link>
                 </div>
