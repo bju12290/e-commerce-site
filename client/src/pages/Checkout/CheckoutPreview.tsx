@@ -1,5 +1,6 @@
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
+import './CheckoutPreview.css'
 
 export default function CheckoutPreview(props: any) {
 
@@ -69,7 +70,7 @@ const ButtonElement = () => {
     return (
     <>
     <Navbar setStripeCustomerInfo={props.setStripeCustomerInfo} cartTotal={props.cartTotal} setCartTotal={props.setCartTotal} stripeCustomerId={props.stripeCustomerId} setStripeCustomerId={props.setStripeCustomerId} cartContents={props.cartContents} setCartContents={props.setCartContents} hasAccount={props.hasAccount} setHasAccount={props.setHasAccount} loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn}/>
-      <div className="d-flex align-items-center flex-column navbar-margin">
+      <div className="d-flex align-items-center flex-column navbar-margin checkout-container">
           <div className="container text-center w-50">
           {cartContents.map((item: any, index: number) => (
                 <div className="row" key={index}>
@@ -91,9 +92,9 @@ const ButtonElement = () => {
                 </div>
             ))}
           </div>
-          <p className="m-5">Total: ${cartTotal.toFixed(2)}</p>
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex flex-column justify-content-center justify-items-center text-center">
+        <p className="m-5">Total: ${cartTotal.toFixed(2)}</p>
         <ButtonElement />
         </div>
         <Footer />

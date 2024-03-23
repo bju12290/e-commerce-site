@@ -7,3 +7,13 @@
     color: #5f7396 !important;
     text-shadow: 2px 2px 0px #131a25;
 }
+
+.dropdown-menu.show{
+   right: 0; 
+}
+
+@media (max-width: 767.98px) { 
+    .navbar-nav .cart{
+        margin-right: 0 !important;
+    }
+}

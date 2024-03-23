@@ -181,13 +181,181 @@ export default function ProductDetails(props: any) {
         <div className="row">
             <div className="col swiper-product-details">
                 <Swiper pagination={true} modules={[Pagination]} className="swiper-product-details">
-                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-1${isNavy}`} /></SwiperSlide>
-                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-2${isNavy}`} /></SwiperSlide>
-                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-3${isNavy}`} /></SwiperSlide>
-                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-4${isNavy}`} /></SwiperSlide>
-                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-5${isNavy}`} /></SwiperSlide>
-                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-6${isNavy}`} /></SwiperSlide>
-                    <SwiperSlide><img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/${productId}-7${isNavy}`} /></SwiperSlide>
+                <SwiperSlide>
+                        <picture>
+                        <source
+                            type="image/avif"
+                            srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_300/${productId}-1${isNavy}.avif 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_600/${productId}-1${isNavy}.avif 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_800/${productId}-1${isNavy}.avif 800w
+                            `}
+                            sizes="(max-width: 768px) 250px, 50vw"  />
+                        <source
+                            type="image/webp"
+                            srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_300/${productId}-1${isNavy}.webp 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_600/${productId}-1${isNavy}.webp 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_800/${productId}-1${isNavy}.webp 800w
+                            `}
+                            sizes="(max-width: 768px) 250px, 50vw"  />
+                        <img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/f_auto,w_800/${productId}-1${isNavy}.jpg`}
+                            alt="Product Image"
+                            width="800"
+                            height="800"
+                            className="img-fluid" />
+                        </picture>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                    <picture>
+                        <source
+                        type="image/avif"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_300/${productId}-2${isNavy}.avif 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_600/${productId}-2${isNavy}.avif 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_800/${productId}-2${isNavy}.avif 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw"  />
+                        <source
+                        type="image/webp"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_300/${productId}-2${isNavy}.webp 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_600/${productId}-2${isNavy}.webp 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_800/${productId}-2${isNavy}.webp 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw"  />
+                        <img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/f_auto,w_800/${productId}-2${isNavy}.jpg`}
+                        alt="Product Image"
+                        width="800"
+                        height="800"
+                        className="img-fluid" />
+                    </picture>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                    <picture>
+                        <source
+                        type="image/avif"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_300/${productId}-3${isNavy}.avif 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_600/${productId}-3${isNavy}.avif 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_800/${productId}-3${isNavy}.avif 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw" />
+                        <source
+                        type="image/webp"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_300/${productId}-3${isNavy}.webp 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_600/${productId}-3${isNavy}.webp 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_800/${productId}-3${isNavy}.webp 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw"  />
+                        <img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/f_auto,w_800/${productId}-3${isNavy}.jpg`}
+                        alt="Product Image"
+                        width="800"
+                        height="800"
+                        className="img-fluid" />
+                    </picture>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                    <picture>
+                        <source
+                        type="image/avif"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_300/${productId}-4${isNavy}.avif 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_600/${productId}-4${isNavy}.avif 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_800/${productId}-4${isNavy}.avif 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw" />
+                        <source
+                        type="image/webp"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_300/${productId}-4${isNavy}.webp 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_600/${productId}-4${isNavy}.webp 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_800/${productId}-4${isNavy}.webp 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw" />
+                        <img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/f_auto,w_800/${productId}-4${isNavy}.jpg`}
+                        alt="Product Image"
+                        width="800"
+                        height="800"
+                        className="img-fluid" />
+                    </picture>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                    <picture>
+                        <source
+                        type="image/avif"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_300/${productId}-5${isNavy}.avif 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_600/${productId}-5${isNavy}.avif 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_800/${productId}-5${isNavy}.avif 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw" />
+                        <source
+                        type="image/webp"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_300/${productId}-5${isNavy}.webp 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_600/${productId}-5${isNavy}.webp 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_800/${productId}-5${isNavy}.webp 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw" />
+                        <img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/f_auto,w_800/${productId}-5${isNavy}.jpg`}
+                        alt="Product Image"
+                        width="800"
+                        height="800"
+                        className="img-fluid" />
+                    </picture>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                    <picture>
+                        <source
+                        type="image/avif"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_300/${productId}-6${isNavy}.avif 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_600/${productId}-6${isNavy}.avif 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_800/${productId}-6${isNavy}.avif 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw" />
+                        <source
+                        type="image/webp"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_300/${productId}-6${isNavy}.webp 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_600/${productId}-6${isNavy}.webp 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_800/${productId}-6${isNavy}.webp 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw" />
+                        <img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/f_auto,w_800/${productId}-6${isNavy}.jpg`}
+                        alt="Product Image"
+                        width="800"
+                        height="800"
+                        className="img-fluid" />
+                    </picture>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                    <picture>
+                        <source
+                        type="image/avif"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_300/${productId}-7${isNavy}.avif 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_600/${productId}-7${isNavy}.avif 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_avif,w_800/${productId}-7${isNavy}.avif 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw" />
+                        <source
+                        type="image/webp"
+                        srcSet={`
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_300/${productId}-7${isNavy}.webp 300w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_600/${productId}-7${isNavy}.webp 600w,
+                            https://res.cloudinary.com/ddv5jvvvg/image/upload/f_webp,w_800/${productId}-7${isNavy}.webp 800w
+                        `}
+                        sizes="(max-width: 768px) 250px, 50vw" />
+                        <img src={`https://res.cloudinary.com/ddv5jvvvg/image/upload/f_auto,w_800/${productId}-7${isNavy}.jpg`}
+                        alt="Product Image"
+                        width="800"
+                        height="800"
+                        className="img-fluid" />
+                    </picture>
+                    </SwiperSlide>
                 </Swiper>
             </div>
             <div className="col-md-5 text-center my-auto">

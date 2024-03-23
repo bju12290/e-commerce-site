@@ -24,7 +24,7 @@ export default function AllProducts(props: any) {
                 <div className="col-md-3">
                     <ProductsFilter setSearchTerm={setSearchTerm} sortBy={sortBy} setSortBy={setSortBy} category={category} setCategory={setCategory}/>
                 </div>
-                <div className="col align-self-end">
+                <div className="products-grid col align-self-end">
                 <ProductsGrid searchTerm={searchTerm} sortBy={sortBy} category={category} productId={props.productId} setProductId={props.setProductId} handleProductClick={props.handleProductClick} cartContents={props.cartContents} setCartContents={props.setCartContents} products={props.products} setProducts={props.setProducts}/>
             </div>
          </div>
