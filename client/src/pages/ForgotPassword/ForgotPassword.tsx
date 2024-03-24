@@ -45,7 +45,9 @@ export default function ForgotPassword(props: any) {
             <h1>Forgot Password</h1>
             <form className="d-flex flex-column align-items-center" onSubmit={handleResetPassword}>
             <div className="form-group mb-3">
+                <label htmlFor="emailInput" className="visually-hidden">Email Address</label>
                 <input
+                id="emailInput"
                 type="email"
                 className="form-control"
                 placeholder="Enter your email address"
