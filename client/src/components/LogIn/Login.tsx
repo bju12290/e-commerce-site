@@ -104,14 +104,15 @@ export default function Login(props: any) {
     return (
         <>
             <div className="d-flex justify-content-center align-items-center text-center flex-column">
-                <form onSubmit={createUser} className="d-flex flex-column m-3">
+                <form onSubmit={createUser} className="d-flex flex-column p-2 w-100">
                     <label className="form-label" htmlFor="email">Email:</label>
                     <input name="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleLoginData(e)} type="email" id="email"/>
                     <label className="form-label" htmlFor="password">Password:</label>
                     <input name="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleLoginData(e)} type="password" id="password"/>
                     <button className="login-register-fade m-1 btn button-color">{hasAccount ? "Login" : "Register"}</button>
+                    <a href="/forgotPassword"><p>{hasAccount ? "Forgot Password?" : ""}</p></a>
                 </form>
-                <div className="d-flex flex-column m-3 mt-0">
+                <div className="d-flex flex-column">
                   <p className="m-0">{hasAccount ? "Need an Account?" : "Already Registered?"}</p>
                   <button onClick={handleHasAccount} className="login-register-fade m-1 btn button-color">{hasAccount ? "Register" : "Login"}</button>
                   <p>{loggedIn ? "Welcome" : ""}</p>

@@ -12,6 +12,7 @@ import UserSettings from './pages/User/UserSettings'
 import OrderDetails from './pages/User/OrderDetails'
 import About from './pages/About/About'
 import FAQs from './pages/About/FAQs'
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 
 interface Product {
   id: string;
@@ -146,6 +147,7 @@ React.useEffect(() => {
         <Route path="/order/:orderId" element={<OrderDetails setStripeCustomerInfo={setStripeCustomerInfo} cartTotal={cartTotal} setCartTotal={setCartTotal} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
         <Route path="/our-story" element={<About setStripeCustomerInfo={setStripeCustomerInfo} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} cartTotal={cartTotal} setCartTotal={setCartTotal} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
         <Route path="/faq" element={<FAQs setStripeCustomerInfo={setStripeCustomerInfo} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} cartTotal={cartTotal} setCartTotal={setCartTotal} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>} />
+        <Route path="/forgotPassword" element={<ForgotPassword setStripeCustomerInfo={setStripeCustomerInfo} cartTotal={cartTotal} setCartTotal={setCartTotal} setProducts={setProducts} stripeCustomerId={stripeCustomerId} setStripeCustomerId={setStripeCustomerId} productId={productId} setProductId={setProductId} products={products} hasAccount={hasAccount} setHasAccount={setHasAccount} loggedIn={loggedIn} setLoggedIn={setLoggedIn} cartContents={cartContents} setCartContents={setCartContents}/>}/>
       </Routes>
     </BrowserRouter>
     </>
