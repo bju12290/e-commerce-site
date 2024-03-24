@@ -46,7 +46,7 @@ export default function ProductCard(props: any) {
                 width="800" 
                 height="800" 
                 className="img-fluid" 
-                alt={props.name} 
+                alt="" 
                 src={`https://res.cloudinary.com/ddv5jvvvg/image/fetch/f_auto,w_800/${props.thumbnail}`} />
         </picture>
                 <p className="product-header-color h4">{props.name}</p>

@@ -57,7 +57,7 @@ export default function Home(props: any) {
                 loggedIn={props.loggedIn} 
                 setLoggedIn={props.setLoggedIn}/>
             <div className="text-nowrap hero-heading-container d-flex flex-column justify-content-center text-center">
-                <p className="h1 header-color mb-4">Your Retro Future Awaits</p>
+                <h1 className="h1 header-color mb-4">Your Retro Future Awaits</h1>
                 <div>
                 <Link to={"/products"}>
                     <button className="shop-btn btn btn-dark button-color">Shop Now</button>
@@ -90,7 +90,7 @@ export default function Home(props: any) {
                                 https://res.cloudinary.com/ddv5jvvvg/image/upload/c_scale,w_2000,f_webp/banner_c1h0js.jpg 2000w,
                                 https://res.cloudinary.com/ddv5jvvvg/image/upload/c_scale,w_2240,f_webp/banner_c1h0js.jpg 2240w"
                         sizes="100vw" />
-                    <img alt="A banner with colorful retro geometrical shapes and two men sporting clothing from the Synthwave Shop's catalogue."
+                    <img alt="A banner with colorful shapes and two men sporting clothing from the Shop's catalogue."
                         width="2000" height="800" className="hero-image w-100 img-fluid"
                         srcSet="
                             https://res.cloudinary.com/ddv5jvvvg/image/upload/w_300/v1697845516/banner_c1h0js.jpg 300w,
@@ -162,7 +162,7 @@ export default function Home(props: any) {
             </picture>
         </div>
         <div className="cta-container d-flex flex-column align-items-center mx-5 text-center">
-            <p className="h1 header-color">Welcome to the Synthwave Wonderland</p>
+            <h1 className="h1 header-color">Welcome to the Synthwave Wonderland</h1>
             <p className="paragraph-color">Step into a World of Synthwave Dreams, Where Past Meets Present in Every Pixel.</p>
             <a href="/products"><button className="btn btn-dark button-color">Start Your Journey</button></a>
         </div>

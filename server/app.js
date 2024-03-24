@@ -3,7 +3,7 @@ const functions = require('firebase-functions');
 const config = require('./config/default')
 const express = require('express')
 const axios = require('axios')
-const cors = require('cors')({ origin: true });
+const cors = require('cors');
 const stripe = require('stripe')(config.stripeApiKey);
 const bodyParser = require('body-parser');
 const cloudinary = require('cloudinary').v2;
@@ -33,7 +33,7 @@ cloudinary.config({
 });
 
 
-app.use(cors)
+app.use(cors({ origin: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }))

@@ -26,9 +26,9 @@ export default function FAQs(props: any) {
         <div id="faq" className="contact">
             <div className="w-100 h-75 d-flex justify-content-center align-items-center flex-column">
                 <h1 className="header-color">Contact Us!</h1>
-                <h5 className="header-color">Send us an Email!</h5>
+                <p className="h5 header-color">Send us an Email!</p>
                 <a href="mailto: support@website.com"><p className="paragraph-color">support@website.com</p></a>
-                <h5 className="header-color">Call or Text us!</h5>
+                <p className="h5 header-color">Call or Text us!</p>
                 <a href="tel: 222-222-2222"><p className="paragraph-color">+1 222-222-2222</p></a>
             </div>
         </div>

@@ -42,7 +42,9 @@ export default function ProductDetails(props: any) {
           }, []);
         
           React.useEffect(() => {
+            if (productId) {
             incrementPopularity(productId);
+            }
           }, [productId]);
         
           const incrementPopularity = (productID: any) => {
