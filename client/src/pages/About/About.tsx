@@ -21,6 +21,7 @@ export default function About(props: any) {
             setCartContents={props.setCartContents} 
             loggedIn={props.loggedIn} 
             setLoggedIn={props.setLoggedIn}
+            showNotification={props.showNotification}
         />
         <div id="story" className="navbar-margin container">
             <h1 className="mb-3">Our Story</h1>

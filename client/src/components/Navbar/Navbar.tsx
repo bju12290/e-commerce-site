@@ -7,7 +7,7 @@ import './Navbar.css'
 
 export default function Navbar(props: any) {
 
-    const { loggedIn, setLoggedIn, hasAccount, setHasAccount, stripeCustomerId, setStripeCustomerId, cartContents, setCartContents, setStripeCustomerInfo } = props
+    const { loggedIn, setLoggedIn, hasAccount, setHasAccount, stripeCustomerId, setStripeCustomerId, cartContents, setCartContents, setStripeCustomerInfo, showNotification } = props
 
     return (
         <>
@@ -43,7 +43,8 @@ export default function Navbar(props: any) {
                                     hasAccount={hasAccount} 
                                     setHasAccount={setHasAccount} 
                                     loggedIn={loggedIn} 
-                                    setLoggedIn={setLoggedIn}/>}
+                                    setLoggedIn={setLoggedIn}
+                                    showNotification={showNotification}/>}
                             </div>
                             </li>
                     </ul>

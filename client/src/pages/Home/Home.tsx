@@ -55,7 +55,8 @@ export default function Home(props: any) {
                 hasAccount={props.hasAccount} 
                 setHasAccount={props.setHasAccount} 
                 loggedIn={props.loggedIn} 
-                setLoggedIn={props.setLoggedIn}/>
+                setLoggedIn={props.setLoggedIn}
+                showNotification={props.showNotification}/>
             <div className="text-nowrap hero-heading-container d-flex flex-column justify-content-center text-center">
                 <h1 className="h1 header-color mb-4">Your Retro Future Awaits</h1>
                 <div>

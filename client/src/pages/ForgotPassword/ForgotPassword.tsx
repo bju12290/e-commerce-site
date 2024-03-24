@@ -39,7 +39,9 @@ export default function ForgotPassword(props: any) {
                 hasAccount={props.hasAccount} 
                 setHasAccount={props.setHasAccount} 
                 loggedIn={props.loggedIn} 
-                setLoggedIn={props.setLoggedIn}/>
+                setLoggedIn={props.setLoggedIn}
+                showNotification={props.showNotification}
+                />
       <div className="d-flex justify-content-center align-items-center vh-100">
         <div className="text-center">
             <h1>Forgot Password</h1>

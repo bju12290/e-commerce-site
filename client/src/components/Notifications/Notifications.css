@@ -1,0 +1,9 @@
+.notification {
+    position: fixed; /* Fixed positioning to make it stay in the viewport */
+    bottom: 10%; /* Towards the bottom of the viewport */
+    left: 50%; /* Centering horizontally */
+    transform: translateX(-50%); /* Adjust centering */
+    z-index: 1050; /* High z-index to ensure it's on top of other content */
+    width: auto; /* Auto width based on content */
+    max-width: 80%; /* Maximum width to ensure it doesn't stretch too wide */
+  }

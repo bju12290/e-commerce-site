@@ -22,6 +22,7 @@ export default function FAQs(props: any) {
             setCartContents={props.setCartContents} 
             loggedIn={props.loggedIn} 
             setLoggedIn={props.setLoggedIn}
+            showNotification={props.showNotification}
         />
         <div id="faq" className="contact">
             <div className="w-100 h-75 d-flex justify-content-center align-items-center flex-column">

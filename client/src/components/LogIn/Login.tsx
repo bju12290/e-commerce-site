@@ -14,6 +14,10 @@ export default function Login(props: any) {
   const setStripeCustomerId = props.setStripeCustomerId
   const setStripeCustomerInfo = props.setStripeCustomerInfo
 
+  const showNotification = props.showNotification
+
+  const [error, setError] = React.useState('');
+
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, you can set your isLoggedIn state to true or perform any other actions.
@@ -47,16 +51,15 @@ export default function Login(props: any) {
         }))
       }
 
-      const handleHasAccount = (e: any) => {
-        setHasAccount((prevState: any) => !prevState)
+      const handleHasAccount = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation();
+        setHasAccount((prevState: any) => !prevState)
         localStorage.setItem('hasAccount', JSON.stringify(!hasAccount))
       }
       
       const createUser = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault()
-      
-
+        e.stopPropagation();
+        e.preventDefault()
       const handleAuthentication = () => {
         if (hasAccount) {
           signInWithEmailAndPassword(auth, loginData.email, loginData.password)
@@ -66,9 +69,31 @@ export default function Login(props: any) {
           localStorage.setItem('hasAccount', JSON.stringify(hasAccount))
         })
         .catch((error) => {
-          const errorCode = error.code
-          const errorMessage = error.message
-          console.error(errorCode, errorMessage)
+          const errorCode = error.code;
+          // Here's the switch statement for error handling
+          let message = '';
+          switch (errorCode) {
+            case 'auth/invalid-email':
+              message = 'Invalid email address.';
+              break;
+            case 'auth/user-disabled':
+              message = 'This user has been disabled.';
+              break;
+            case 'auth/missing-password':
+              message = 'Password field cannot be blank!';
+              break;
+            case 'auth/invalid-login-credentials':
+              message = 'Incorrect username or password.';
+              break;
+            case 'auth/missing-email':
+              message = 'Email field cannot be blank!';
+              break;
+            default:
+              message = 'An error occurred. Please try again.';
+              break;
+          }
+          showNotification(message);
+          console.error(errorCode, message);
         })} else {
           createUserWithEmailAndPassword(auth, loginData.email, loginData.password)
           .then(() => {
@@ -86,7 +111,31 @@ export default function Login(props: any) {
                 //console.log('Stripe customer created:', data);
               })
               .catch((error) => {
-                console.error('Error creating Stripe customer:', error);
+                const errorCode = error.code;
+                // Here's the switch statement for error handling
+                let message = '';
+                switch (errorCode) {
+                  case 'auth/invalid-email':
+                    message = 'Invalid email address.';
+                    break;
+                  case 'auth/user-disabled':
+                    message = 'This user has been disabled.';
+                    break;
+                  case 'auth/missing-password':
+                    message = 'Password field cannot be blank!';
+                    break;
+                  case 'auth/invalid-login-credentials':
+                    message = 'Incorrect username or password.';
+                    break;
+                  case 'auth/missing-email':
+                    message = 'Email field cannot be blank!';
+                    break;
+                  default:
+                    message = 'An error occurred. Please try again.';
+                    break;
+                }
+                showNotification(message);
+                console.error(errorCode, message);
               });
           })
           .catch((error) => {
@@ -98,6 +147,22 @@ export default function Login(props: any) {
         handleAuthentication()
 
       }
+
+      interface ErrorPopupProps {
+        message: string;
+        onClose: () => void;
+      }
+
+      const ErrorPopup: React.FC<ErrorPopupProps> = ({ message, onClose }) => {
+        return (
+          <div className="error-popup">
+            <div className="error-content">
+              <p>{message}</p>
+              <button onClick={onClose}>Close</button>
+            </div>
+          </div>
+        );
+      };
     
 
 
@@ -117,6 +182,7 @@ export default function Login(props: any) {
                   <button onClick={handleHasAccount} className="login-register-fade m-1 btn button-color">{hasAccount ? "Register" : "Login"}</button>
                   <p>{loggedIn ? "Welcome" : ""}</p>
                 </div>
+                {error && <ErrorPopup message={error} onClose={() => setError('')} />}
             </div>
         </>
         
